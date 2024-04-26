@@ -1,19 +1,7 @@
 'use server';
 
-import { shortenLink } from '@/server/methods';
+import { shortenUrl } from '@/server/methods';
 
-type Shortened = {
-  path: string;
-  id: number;
-};
+const shortenLink = async (url: string) => shortenUrl(url);
 
-const shortenLinkAction = async (url: string): Promise<Shortened> => {
-  const link = await shortenLink(url);
-
-  return {
-    id: link.id,
-    path: link.path,
-  };
-};
-
-export default shortenLinkAction;
+export default shortenLink;
