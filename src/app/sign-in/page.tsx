@@ -37,7 +37,6 @@ const SignIn: NextPage = () => {
           setError('email', { message: 'Invalid email or password' });
           throw err;
         });
-      await new Promise((res) => setTimeout(res, 5000));
     },
     [router]
   );
@@ -45,7 +44,7 @@ const SignIn: NextPage = () => {
   return (
     <div className='pt-28 md:pt-36'>
       <div className='w-full px-3 m-auto bg-transparent max-w-lg'>
-        <Heading text='Log in' />
+        <Heading text='Login' />
 
         <p className='pt-3 text-center text-neutral'>
           Don't have an account yet?
@@ -65,7 +64,9 @@ const SignIn: NextPage = () => {
                 type='email'
                 placeholder='Email'
                 required
-                {...register('email')}
+                {...register('email', {
+                  required: { value: true, message: 'Provide your email' },
+                })}
               />
             </label>
             <InputError text={errors.email?.message} />
@@ -78,13 +79,15 @@ const SignIn: NextPage = () => {
                 type='password'
                 placeholder='Password'
                 required
-                {...register('password')}
+                {...register('password', {
+                  required: { value: true, message: 'Provide your password' },
+                })}
               />
             </label>
             <InputError text={errors.password?.message} />
           </div>
 
-          <Button loading={isSubmitting}>Login</Button>
+          <Button loading={isSubmitting}>Sign in</Button>
         </form>
       </div>
     </div>
