@@ -25,6 +25,7 @@ const Input: React.FC<Props> = ({
     <label className='input input-lg input-bordered flex items-center gap-2'>
       {icon && <Icon type={icon} className='w-4 h-4 opacity-70' />}
       <input
+        className='w-full'
         type={type}
         placeholder={placeholder}
         required={required}

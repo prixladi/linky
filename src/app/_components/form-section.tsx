@@ -1,72 +1,75 @@
 'use client';
 
-import { ChangeEvent, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import { isValidUrl, makeShortenedLink } from '@/lib';
-import { Button, InputError } from '@/components';
+import { Button, Input, InputError } from '@/components';
 
 import { shortenUrlAction } from '../_actions';
 
 import ResultSection from './result-section';
+import { SubmitHandler, useForm } from 'react-hook-form';
+
+type FormValues = { url: string };
 
 type Result = { link: string; forUrl: string };
 
 const FormSection: React.FC = () => {
-  const [url, setUrl] = useState<string>();
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors, isSubmitting },
+  } = useForm<FormValues>();
+
   const [result, setResult] = useState<Result>();
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string>();
 
-  const onInputChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    setUrl(e.target.value);
-    setError(undefined);
-  }, []);
+  const onSubmit: SubmitHandler<FormValues> = useCallback(
+    async (values) => {
+      if (values.url === result?.forUrl) return;
+      
+      const link = await shortenUrlAction(values.url)
+        .then(({ path }) => makeShortenedLink(path))
+        .catch((err) => {
+          setError('url', {
+            message: 'Error occurred on the server, try again later',
+          });
+          throw err;
+        });
 
-  const onShortenClick = useCallback(async () => {
-    if (loading) return;
-    if (url === result?.forUrl) return;
-
-    setResult(undefined);
-    if (!url || !isValidUrl(url)) {
-      setError('You must provide a valid http url');
-      return;
-    }
-
-    setError(undefined);
-    setLoading(true);
-    const link = await shortenUrlAction(url)
-      .then(({ path }) => makeShortenedLink(path))
-      .catch((err) => {
-        setError('Error occurred on the server, try again later');
-        throw err;
-      })
-      .finally(() => setLoading(false));
-
-    setResult({ link, forUrl: url });
-  }, [url, result, loading]);
+      setResult({ link, forUrl: values.url });
+    },
+    [result]
+  );
 
   return (
     <div>
-      <div className='flex sm:flex-row flex-col gap-3 flex-auto items-center'>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className='flex sm:flex-row flex-col gap-3 flex-auto items-center'
+      >
         <div className='w-full'>
-          <label className='input input-lg input-bordered flex items-center gap-2 w-full'>
-            <input
-              className='w-full'
-              onChange={onInputChange}
-              value={url}
-              type='url'
-              placeholder='Enter your link'
-            />
-          </label>
-          <InputError text={error} className='flex sm:hidden' />
+          <Input
+            placeholder='Enter your link'
+            required
+            register={register('url', {
+              required: {
+                value: true,
+                message: 'You must provide a valid http url',
+              },
+              validate: (url) => {
+                if (isValidUrl(url)) return undefined;
+                return 'You must provide a valid http url';
+              },
+            })}
+          />
+          <InputError text={errors.url?.message} className='flex sm:hidden' />
         </div>
 
-        <Button loading={loading} onClick={onShortenClick}>
-          Shorten!
-        </Button>
-      </div>
+        <Button loading={isSubmitting}>Shorten!</Button>
+      </form>
 
-      <InputError text={error} className='sm:flex hidden' />
+      <InputError text={errors.url?.message} className='sm:flex hidden' />
       <ResultSection link={result?.link} />
     </div>
   );
