@@ -13,7 +13,7 @@ const icons =
     key: { component: KeyIcon, viewBox: '0 0 16 16' },
   } as const;
 
-type IconType = keyof typeof icons;
+export type IconType = keyof typeof icons;
 
 export type IconProps = SVGAttributes<any> & {
   type: IconType;

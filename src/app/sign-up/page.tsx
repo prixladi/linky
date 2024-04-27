@@ -3,7 +3,7 @@
 import { NextPage } from 'next';
 import { useCallback } from 'react';
 
-import { Button, Heading, Icon, InputError } from '@/components';
+import { Button, Heading, Input } from '@/components';
 
 import { registerAction } from './_actions';
 import { loginAction } from '@/actions';
@@ -64,51 +64,41 @@ const SignUp: NextPage = () => {
           onSubmit={handleSubmit(onSubmit)}
           className='pt-8 flex flex-col gap-4'
         >
-          <div>
-            <label className='input input-lg input-bordered flex items-center gap-2'>
-              <Icon type='envelope' className='w-4 h-4 opacity-70' />
-              <input
-                type='email'
-                placeholder='Email'
-                required
-                {...register('email', {
-                  required: {
-                    value: true,
-                    message: 'You must provide a valid email',
-                  },
-                  pattern: {
-                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                    message: 'You must provide a valid email',
-                  },
-                })}
-              />
-            </label>
-            <InputError text={errors.email?.message} />
-          </div>
+          <Input
+            icon='envelope'
+            type='email'
+            placeholder='Email'
+            error={errors.email?.message}
+            required
+            register={register('email', {
+              required: {
+                value: true,
+                message: 'You must provide a valid email',
+              },
+              pattern: {
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: 'You must provide a valid email',
+              },
+            })}
+          />
 
-          <div>
-            <label className='input input-lg input-bordered flex items-center gap-2'>
-              <Icon type='key' className='w-4 h-4 opacity-70' />
-              <input
-                type='password'
-                placeholder='Password'
-                required
-                {...register('password', {
-                  required: {
-                    value: true,
-                    message:
-                      'You must provide password at least 5 characters long',
-                  },
-                  minLength: {
-                    value: 5,
-                    message:
-                      'You must provide password at least 5 characters long',
-                  },
-                })}
-              />
-            </label>
-            <InputError text={errors.password?.message} />
-          </div>
+          <Input
+            icon='key'
+            type='password'
+            placeholder='Password'
+            required
+            error={errors.password?.message}
+            register={register('password', {
+              required: {
+                value: true,
+                message: 'You must provide password at least 5 characters long',
+              },
+              minLength: {
+                value: 5,
+                message: 'You must provide password at least 5 characters long',
+              },
+            })}
+          />
 
           <Button loading={isSubmitting}>Sign up</Button>
         </form>
