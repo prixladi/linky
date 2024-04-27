@@ -9,9 +9,9 @@ const InputError: React.FC<Props> = ({ text, className }) => {
   if (!text) return null;
 
   return (
-    <span className={clsx('animateShow mt-1 text-error px-4', className)}>
+    <div className={clsx('animateShow pt-1 px-4 text-error', className)}>
       {text}
-    </span>
+    </div>
   );
 };
 

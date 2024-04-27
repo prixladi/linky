@@ -49,7 +49,7 @@ const SignUp: NextPage = () => {
   );
 
   return (
-    <div className='pt-28 md:pt-36 w-full px-3 m-auto bg-transparent max-w-lg'>
+    <div className='pt-24 md:pt-36 w-full px-3 m-auto bg-transparent max-w-lg'>
       <Heading text='Register' />
 
       <p className='pt-3 text-center text-neutral'>
@@ -61,14 +61,12 @@ const SignUp: NextPage = () => {
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className='pt-8 flex flex-col gap-4'
+        className='pt-8 flex flex-col gap-2'
       >
         <Input
           icon='envelope'
-          type='email'
           placeholder='Email'
           error={errors.email?.message}
-          required
           register={register('email', {
             required: {
               value: true,
@@ -76,16 +74,15 @@ const SignUp: NextPage = () => {
             },
             pattern: {
               value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-              message: 'You must provide a valid email',
+              message: 'Provide a valid email',
             },
           })}
         />
 
         <Input
-          icon='key'
           type='password'
+          icon='key'
           placeholder='Password'
-          required
           error={errors.password?.message}
           register={register('password', {
             required: {

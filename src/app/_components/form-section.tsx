@@ -9,6 +9,7 @@ import { shortenUrlAction } from '../_actions';
 
 import ResultSection from './result-section';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import clsx from 'clsx';
 
 type FormValues = { url: string };
 
@@ -27,7 +28,7 @@ const FormSection: React.FC = () => {
   const onSubmit: SubmitHandler<FormValues> = useCallback(
     async (values) => {
       if (values.url === result?.forUrl) return;
-      
+
       const link = await shortenUrlAction(values.url)
         .then(({ path }) => makeShortenedLink(path))
         .catch((err) => {
@@ -48,10 +49,15 @@ const FormSection: React.FC = () => {
         onSubmit={handleSubmit(onSubmit)}
         className='flex sm:flex-row flex-col gap-3 flex-auto items-center'
       >
-        <div className='w-full'>
+        <div
+          className={clsx('w-full', {
+            'mb-7 sm:mb-0': !Boolean(errors.url?.message),
+          })}
+        >
           <Input
             placeholder='Enter your link'
-            required
+            error={errors.url?.message}
+            errorMessageHandling='manual'
             register={register('url', {
               required: {
                 value: true,
