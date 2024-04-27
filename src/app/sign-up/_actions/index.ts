@@ -1,1 +1,1 @@
-export { default as register } from './register';
+export { default as registerAction } from './register-action';

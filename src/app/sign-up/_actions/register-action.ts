@@ -7,6 +7,6 @@ type RegisterData = {
   password: string;
 };
 
-const register = async (data: RegisterData) => createNew(data);
+const registerAction = async (data: RegisterData) => createNew(data);
 
-export default register;
+export default registerAction;

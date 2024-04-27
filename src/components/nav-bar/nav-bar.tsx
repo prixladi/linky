@@ -10,7 +10,7 @@ const NavBar = () => {
       </div>
 
       <div className='navbar-end'>
-        <Link href="/sign-up" className='btn btn-neutral'>Dashboard</Link>
+        <Link href="/dashboard" className='btn btn-neutral'>Dashboard</Link>
 
         <div className='flex-none gap-2'>
           <div className='dropdown dropdown-end'>

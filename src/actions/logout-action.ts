@@ -1,0 +1,10 @@
+'use server';
+
+import { cookies } from 'next/headers';
+
+const logoutAction = () => {
+  cookies().delete('accessToken');
+  cookies().delete('refreshToken');
+};
+
+export default logoutAction;

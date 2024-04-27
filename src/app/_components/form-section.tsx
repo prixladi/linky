@@ -4,7 +4,7 @@ import { ChangeEvent, useCallback, useState } from 'react';
 
 import { isValidUrl, makeShortenedLink } from '@/app/_lib';
 
-import { shortenLink } from '../_actions';
+import { shortenUrlAction } from '../_actions';
 
 import ErrorSection from './error-section';
 import ResultSection from './result-section';
@@ -28,16 +28,16 @@ const FormSection: React.FC = () => {
 
     setResult(undefined);
     if (!url || !isValidUrl(url)) {
-      setError('You must provide a valid http url.');
+      setError('You must provide a valid http url');
       return;
     }
 
     setError(undefined);
     setLoading(true);
-    const link = await shortenLink(url)
+    const link = await shortenUrlAction(url)
       .then(({ path }) => makeShortenedLink(path))
       .catch((err) => {
-        setError('Error occurred on the server. Try again later.');
+        setError('Error occurred on the server, try again later');
         throw err;
       })
       .finally(() => setLoading(false));

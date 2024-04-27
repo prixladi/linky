@@ -1,1 +1,1 @@
-export { default as shortenLink } from './shorten-link';
+export { default as shortenUrlAction } from './shorten-url-action';
