@@ -3,7 +3,7 @@
 import { NextPage } from 'next';
 import { ChangeEvent, useCallback, useState } from 'react';
 
-import { Button, Heading, Icon } from '@/components';
+import { Button, Heading, Icon, InputError } from '@/components';
 
 import { loginAction } from '@/actions';
 import Link from 'next/link';
@@ -81,19 +81,10 @@ const SignIn: NextPage = () => {
                 type='email'
                 onChange={onEmailInputChange}
                 value={email}
-                className='grow'
                 placeholder='Email'
               />
             </label>
-            {emailError && (
-              <span
-                className={
-                  'animateShow mt-1 text-error px-4 items-center justify-between rounded-xl cursor-pointer'
-                }
-              >
-                {emailError}
-              </span>
-            )}
+            <InputError text={emailError} />
           </div>
 
           <div>
@@ -103,20 +94,12 @@ const SignIn: NextPage = () => {
                 type='password'
                 onChange={onPasswordInputChange}
                 value={password}
-                className='grow'
                 placeholder='Password'
               />
             </label>
-            {passwordError && (
-              <span
-                className={
-                  'animateShow mt-1 text-error px-4 items-center justify-between rounded-xl cursor-pointer'
-                }
-              >
-                {passwordError}
-              </span>
-            )}
+            <InputError text={passwordError} />
           </div>
+
           <Button loading={loading} onClick={onSubmit}>
             Login
           </Button>

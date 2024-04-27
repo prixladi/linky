@@ -3,11 +3,10 @@
 import { ChangeEvent, useCallback, useState } from 'react';
 
 import { isValidUrl, makeShortenedLink } from '@/lib';
-import { Button } from '@/components';
+import { Button, InputError } from '@/components';
 
 import { shortenUrlAction } from '../_actions';
 
-import ErrorSection from './error-section';
 import ResultSection from './result-section';
 
 type Result = { link: string; forUrl: string };
@@ -59,7 +58,7 @@ const FormSection: React.FC = () => {
               placeholder='Enter your link'
             />
           </label>
-          <ErrorSection visible='sm-' error={error} />
+          <InputError text={error} className='flex sm:hidden' />
         </div>
 
         <Button loading={loading} onClick={onShortenClick}>
@@ -67,7 +66,7 @@ const FormSection: React.FC = () => {
         </Button>
       </div>
 
-      <ErrorSection visible='sm+' error={error} />
+      <InputError text={error} className='sm:flex hidden' />
       <ResultSection link={result?.link} />
     </div>
   );
