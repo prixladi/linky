@@ -1,4 +1,4 @@
-import { getLinkByPath } from '@/server/methods';
+import { getLinkByPath } from '@/server/methods/link';
 import { NextPage } from 'next';
 import { redirect } from 'next/navigation';
 

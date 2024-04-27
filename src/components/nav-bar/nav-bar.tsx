@@ -1,12 +1,16 @@
+import Link from 'next/link';
+
 const NavBar = () => {
   return (
     <div className='navbar backdrop-blur-sm	fixed z-50'>
       <div className='flex-1 navbar-start'>
-        <a className='btn btn-ghost text-2xl'>Linky</a>
+        <Link href='/' className='btn btn-ghost text-2xl'>
+          Linky
+        </Link>
       </div>
 
       <div className='navbar-end'>
-        <a className='btn btn-neutral'>Dashboard</a>
+        <Link href="/sign-up" className='btn btn-neutral'>Dashboard</Link>
 
         <div className='flex-none gap-2'>
           <div className='dropdown dropdown-end'>

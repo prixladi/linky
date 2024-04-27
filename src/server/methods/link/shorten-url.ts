@@ -1,14 +1,17 @@
-import { db } from '../db';
-import { item } from '../db/schema';
+import { db } from '../../db';
+import { link } from '../../db/schema';
 
 type Result = { path: string };
 
 const shortenUrl = async (url: string): Promise<Result> => {
   const path = generateRandomPath(5);
-  const insertedItem = await db.insert(item).values({ url, path }).returning();
+  const insertedLink = await db
+    .insert(link)
+    .values({ url, path, createdAt: new Date() })
+    .returning();
 
   return {
-    path: insertedItem[0]?.path,
+    path: insertedLink[0]?.path,
   };
 };
 
