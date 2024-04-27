@@ -6,7 +6,7 @@ type Props = React.PropsWithChildren<{
 }>;
 
 const Button: React.FC<Props> = ({ onClick, loading, children }) => (
-  <button onClick={onClick} className='btn btn-lg '>
+  <button disabled={loading} onClick={onClick} className='btn btn-lg '>
     {loading ? <span className='loading loading-spinner' /> : children}
   </button>
 );
