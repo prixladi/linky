@@ -2,7 +2,8 @@
 
 import { ChangeEvent, useCallback, useState } from 'react';
 
-import { isValidUrl, makeShortenedLink } from '@/app/_lib';
+import { isValidUrl, makeShortenedLink } from '@/lib';
+import { Button } from '@/components';
 
 import { shortenUrlAction } from '../_actions';
 
@@ -61,15 +62,9 @@ const FormSection: React.FC = () => {
           <ErrorSection visible='sm-' error={error} />
         </div>
 
-        <button onClick={onShortenClick} className='btn btn-lg self-center'>
-          {loading ? (
-            <>
-              <span className='loading loading-spinner'></span> {'Shortening'}
-            </>
-          ) : (
-            'Shorten!'
-          )}
-        </button>
+        <Button loading={loading} onClick={onShortenClick}>
+          Shorten!
+        </Button>
       </div>
 
       <ErrorSection visible='sm+' error={error} />

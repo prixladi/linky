@@ -3,7 +3,7 @@
 import { NextPage } from 'next';
 import { ChangeEvent, useCallback, useState } from 'react';
 
-import { Heading, Icon } from '@/components';
+import { Button, Heading, Icon } from '@/components';
 
 import { registerAction } from './_actions';
 import { loginAction } from '@/actions';
@@ -18,7 +18,7 @@ const SignUp: NextPage = () => {
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
-  
+
   const onEmailInputChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
     setEmailError(undefined);
@@ -56,7 +56,7 @@ const SignUp: NextPage = () => {
         }
 
         await loginAction({ email, password });
-        
+
         router.push('/dashboard');
       })
       .catch((err) => {
@@ -120,17 +120,9 @@ const SignUp: NextPage = () => {
               </span>
             )}
           </div>
-          <div>
-            <button onClick={onSubmit} className='btn btn-lg '>
-              {loading ? (
-                <>
-                  <span className='loading loading-spinner'></span>
-                </>
-              ) : (
-                'Register'
-              )}
-            </button>
-          </div>
+          <Button loading={loading} onClick={onSubmit}>
+            Register
+          </Button>
         </div>
       </div>
     </div>

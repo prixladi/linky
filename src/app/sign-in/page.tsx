@@ -3,7 +3,7 @@
 import { NextPage } from 'next';
 import { ChangeEvent, useCallback, useState } from 'react';
 
-import { Heading, Icon } from '@/components';
+import { Button, Heading, Icon } from '@/components';
 
 import { loginAction } from '@/actions';
 import Link from 'next/link';
@@ -117,17 +117,9 @@ const SignIn: NextPage = () => {
               </span>
             )}
           </div>
-          <div>
-            <button onClick={onSubmit} className='btn btn-lg '>
-              {loading ? (
-                <>
-                  <span className='loading loading-spinner'></span>
-                </>
-              ) : (
-                'Login'
-              )}
-            </button>
-          </div>
+          <Button loading={loading} onClick={onSubmit}>
+            Login
+          </Button>
         </div>
       </div>
     </div>
