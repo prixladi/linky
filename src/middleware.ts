@@ -9,15 +9,15 @@ export const middleware = async (request: NextRequest) => {
   const successResponse = NextResponse.next();
 
   const accessToken = request.cookies.get('accessToken')?.value;
-  if (!accessToken) return NextResponse.redirect('/sign-up');
+  if (!accessToken) return NextResponse.redirect(new URL('/sign-up', request.url));
 
   let user = await getUserFromToken({ accessToken });
   if (!user) {
     const refreshToken = request.cookies.get('refreshToken')?.value;
-    if (!refreshToken) return NextResponse.redirect('/sign-in');
+    if (!refreshToken) return NextResponse.redirect(new URL('/sign-in'));
 
     const refreshResult = await refreshUserToken({ refreshToken });
-    if ('error' in refreshResult) return NextResponse.redirect('/sign-in');
+    if ('error' in refreshResult) return NextResponse.redirect(new URL('/sign-in'));
 
     successResponse.cookies.set('accessToken', refreshResult.accessToken);
     successResponse.headers.set('accessToken', refreshResult.accessToken);
