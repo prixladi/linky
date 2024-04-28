@@ -2,14 +2,17 @@
 
 import { useCallback, useState } from 'react';
 
-import { isValidUrl, makeShortenedLink } from '@/lib';
+import clsx from 'clsx';
+import { useForm } from 'react-hook-form';
+import type { SubmitHandler } from 'react-hook-form';
+
 import { Button, Input, InputError } from '@/components';
+import { isValidUrl, makeShortenedLink } from '@/lib';
 
 import { shortenUrlAction } from '../_actions';
 
 import ResultSection from './result-section';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import clsx from 'clsx';
+
 
 type FormValues = { url: string };
 
@@ -40,24 +43,24 @@ const FormSection: React.FC = () => {
 
       setResult({ link, forUrl: values.url });
     },
-    [result]
+    [result, setError],
   );
 
   return (
     <div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className='flex sm:flex-row flex-col gap-3 flex-auto items-center'
+        className="flex sm:flex-row flex-col gap-3 flex-auto items-center"
       >
         <div
           className={clsx('w-full', {
-            'mb-7 sm:mb-0': !Boolean(errors.url?.message),
+            'mb-7 sm:mb-0': !errors.url?.message,
           })}
         >
           <Input
-            placeholder='Enter your link'
+            placeholder="Enter your link"
             error={errors.url?.message}
-            errorMessageHandling='manual'
+            errorMessageHandling="manual"
             register={register('url', {
               required: {
                 value: true,
@@ -69,13 +72,15 @@ const FormSection: React.FC = () => {
               },
             })}
           />
-          <InputError text={errors.url?.message} className='flex sm:hidden' />
+          <InputError text={errors.url?.message} className="flex sm:hidden" />
         </div>
 
-        <Button loading={isSubmitting}>Shorten!</Button>
+        <Button type="submit" loading={isSubmitting}>
+          Shorten!
+        </Button>
       </form>
 
-      <InputError text={errors.url?.message} className='sm:flex hidden' />
+      <InputError text={errors.url?.message} className="sm:flex hidden" />
       <ResultSection link={result?.link} />
     </div>
   );

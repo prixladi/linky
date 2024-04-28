@@ -17,10 +17,7 @@ type Result =
       error: 'conflict';
     };
 
-const createNew = async ({
-  email,
-  password,
-}: CreateNewData): Promise<Result> => {
+const createNew = async ({ email, password }: CreateNewData): Promise<Result> => {
   const lowercaseEmail = email.toLowerCase();
 
   const [existingUser] = await db

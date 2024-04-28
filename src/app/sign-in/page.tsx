@@ -1,14 +1,16 @@
 'use client';
 
-import { NextPage } from 'next';
-import { useCallback } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
-
-import { Button, Heading, Input, InputError } from '@/components';
-
-import { loginAction } from '@/actions';
+import type { NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useCallback } from 'react';
+
+import { useForm } from 'react-hook-form';
+import type { SubmitHandler } from 'react-hook-form';
+
+import { loginAction } from '@/actions';
+import { Button, Heading, Input } from '@/components';
+
 
 type FormValues = { email: string; password: string };
 
@@ -38,27 +40,24 @@ const SignIn: NextPage = () => {
           throw err;
         });
     },
-    [router]
+    [router, setError],
   );
 
   return (
-    <div className='pt-24 md:pt-36 w-full px-3 m-auto bg-transparent max-w-lg'>
-      <Heading text='Login' />
+    <div className="pt-24 md:pt-36 w-full px-3 m-auto bg-transparent max-w-lg">
+      <Heading text="Login" />
 
-      <p className='pt-3 text-center text-neutral'>
-        Don't have an account yet?
-        <Link className='text-secondary underline pl-1' href={'/sign-up'}>
-          Register
+      <p className="pt-3 text-center text-neutral">
+        Don&apos;t have an account yet?
+        <Link className="text-secondary underline pl-1" href="/sign-up">
+          Registe
         </Link>
       </p>
 
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className='pt-8 flex flex-col gap-1'
-      >
+      <form onSubmit={handleSubmit(onSubmit)} className="pt-8 flex flex-col gap-1">
         <Input
-          icon='envelope'
-          placeholder='Email'
+          icon="envelope"
+          placeholder="Email"
           error={errors.email?.message}
           register={register('email', {
             required: { value: true, message: 'Provide your email' },
@@ -70,16 +69,18 @@ const SignIn: NextPage = () => {
         />
 
         <Input
-          type='password'
-          icon='key'
-          placeholder='Password'
+          type="password"
+          icon="key"
+          placeholder="Password"
           error={errors.password?.message}
           register={register('password', {
             required: { value: true, message: 'Provide your password' },
           })}
         />
 
-        <Button loading={isSubmitting}>Sign in</Button>
+        <Button type="submit" loading={isSubmitting}>
+          Sign in
+        </Button>
       </form>
     </div>
   );

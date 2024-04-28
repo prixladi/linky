@@ -1,5 +1,5 @@
-import { eq } from 'drizzle-orm';
 import bcrypt from 'bcrypt';
+import { eq } from 'drizzle-orm';
 import jwt from 'jsonwebtoken';
 
 import { db } from '@/server/db';
@@ -28,14 +28,9 @@ const login = async ({ email, password }: LoginData): Promise<Result> => {
     .where(eq(user.email, lowercaseEmail))
     .limit(1);
 
-  if (
-    !existingUser ||
-    !(await bcrypt.compare(password, existingUser.passwordHash))
-  ) {
+  if (!existingUser || !(await bcrypt.compare(password, existingUser.passwordHash))) {
     return { error: 'badRequest' };
   }
-
-  const now = Date.now();
 
   const accessToken = jwt.sign(
     {
@@ -45,7 +40,7 @@ const login = async ({ email, password }: LoginData): Promise<Result> => {
     'shhhhh',
     {
       expiresIn: 60 * 5, // 5 minutes
-    }
+    },
   );
 
   const refreshToken = jwt.sign(
@@ -56,7 +51,7 @@ const login = async ({ email, password }: LoginData): Promise<Result> => {
     'shhhhh',
     {
       expiresIn: 60 * 60 * 24 * 30, // month
-    }
+    },
   );
 
   return { accessToken, refreshToken };

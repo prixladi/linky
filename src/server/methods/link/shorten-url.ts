@@ -15,12 +15,11 @@ const shortenUrl = async (url: string): Promise<Result> => {
   };
 };
 
-const characters =
-  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
 const generateRandomPath = (length: number) => {
   let result = '';
-  for (let cnt = 0; cnt < length; cnt++) {
+  for (let cnt = 0; cnt < length; cnt += 1) {
     result += characters.charAt(Math.floor(Math.random() * characters.length));
   }
   return result;

@@ -8,11 +8,7 @@ type Props = {
 const InputError: React.FC<Props> = ({ text, className }) => {
   if (!text) return null;
 
-  return (
-    <div className={clsx('animateShow pt-1 px-4 text-error', className)}>
-      {text}
-    </div>
-  );
+  return <div className={clsx('animateShow pt-1 px-4 text-error', className)}>{text}</div>;
 };
 
 export default InputError;

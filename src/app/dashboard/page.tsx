@@ -1,16 +1,15 @@
 'use client';
 
-import logoutAction from '@/actions/logout-action';
-import { NextPage } from 'next';
+import type { NextPage } from 'next';
 
-const Dashboard: NextPage = () => {
-  return (
-    <div className='pt-36 pl-36'>
-      <button className='btn' onClick={() => logoutAction()}>
-        Logout
-      </button>
-    </div>
-  );
-};
+import logoutAction from '@/actions/logout-action';
+
+const Dashboard: NextPage = () => (
+  <div className="pt-36 pl-36">
+    <button type="submit" className="btn" onClick={() => logoutAction()}>
+      Logout
+    </button>
+  </div>
+);
 
 export default Dashboard;

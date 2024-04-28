@@ -1,7 +1,8 @@
 'use server';
 
-import { login } from '@/server/methods/user';
 import { cookies } from 'next/headers';
+
+import { login } from '@/server/methods/user';
 
 type LoginData = {
   email: string;
@@ -16,6 +17,8 @@ const loginAction = async (data: LoginData) => {
 
   cookies().set('accessToken', accessToken);
   cookies().set('refreshToken', refreshToken);
+
+  return undefined;
 };
 
 export default loginAction;

@@ -1,9 +1,11 @@
-import { UseFormRegisterReturn } from 'react-hook-form';
-import { Icon } from '../icons';
-import { IconType } from '../icons/icon';
-import { HTMLInputTypeAttribute } from 'react';
-import InputError from '../input-error';
+import type { HTMLInputTypeAttribute } from 'react';
+
 import clsx from 'clsx';
+import type { UseFormRegisterReturn } from 'react-hook-form';
+
+import { Icon } from '../icons';
+import type { IconType } from '../icons/icon';
+import InputError from '../input-error';
 
 type Props = {
   register: UseFormRegisterReturn<any>;
@@ -26,14 +28,16 @@ const Input: React.FC<Props> = ({
 }) => (
   <div>
     <label
+      htmlFor={register.name}
       className={clsx('input input-lg input-bordered flex items-center gap-2', {
         'input-error': Boolean(error),
-        'mb-7': errorMessageHandling === 'auto' && !Boolean(error),
+        'mb-7': errorMessageHandling === 'auto' && !error,
       })}
     >
-      {icon && <Icon type={icon} className='w-4 h-4 opacity-70' />}
+      {icon && <Icon type={icon} className="w-4 h-4 opacity-70" />}
       <input
-        className='w-full'
+        id={register.name}
+        className="w-full"
         type={type}
         placeholder={placeholder}
         required={required}

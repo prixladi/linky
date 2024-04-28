@@ -1,15 +1,18 @@
 'use client';
 
-import { NextPage } from 'next';
+import type { NextPage } from 'next';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
 
+import { useForm } from 'react-hook-form';
+import type { SubmitHandler } from 'react-hook-form';
+
+import { loginAction } from '@/actions';
 import { Button, Heading, Input } from '@/components';
 
 import { registerAction } from './_actions';
-import { loginAction } from '@/actions';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { SubmitHandler, useForm } from 'react-hook-form';
+
 
 type FormValues = { email: string; password: string };
 
@@ -45,27 +48,24 @@ const SignUp: NextPage = () => {
           throw err;
         });
     },
-    [router]
+    [router, setError],
   );
 
   return (
-    <div className='pt-24 md:pt-36 w-full px-3 m-auto bg-transparent max-w-lg'>
-      <Heading text='Register' />
+    <div className="pt-24 md:pt-36 w-full px-3 m-auto bg-transparent max-w-lg">
+      <Heading text="Register" />
 
-      <p className='pt-3 text-center text-neutral'>
+      <p className="pt-3 text-center text-neutral">
         Already have an account?
-        <Link className='text-secondary underline pl-1' href={'/sign-in'}>
+        <Link className="text-secondary underline pl-1" href="/sign-in">
           Login
         </Link>
       </p>
 
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className='pt-8 flex flex-col gap-2'
-      >
+      <form onSubmit={handleSubmit(onSubmit)} className="pt-8 flex flex-col gap-2">
         <Input
-          icon='envelope'
-          placeholder='Email'
+          icon="envelope"
+          placeholder="Email"
           error={errors.email?.message}
           register={register('email', {
             required: {
@@ -80,9 +80,9 @@ const SignUp: NextPage = () => {
         />
 
         <Input
-          type='password'
-          icon='key'
-          placeholder='Password'
+          type="password"
+          icon="key"
+          placeholder="Password"
           error={errors.password?.message}
           register={register('password', {
             required: {
@@ -96,7 +96,9 @@ const SignUp: NextPage = () => {
           })}
         />
 
-        <Button loading={isSubmitting}>Sign up</Button>
+        <Button type="submit" loading={isSubmitting}>
+          Sign up
+        </Button>
       </form>
     </div>
   );

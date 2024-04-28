@@ -6,6 +6,8 @@ export const middleware = (request: NextRequest) => {
   if (!accessToken) {
     return NextResponse.redirect(new URL('/sign-in', request.url));
   }
+
+  return NextResponse.next();
 };
 
 export const config = {

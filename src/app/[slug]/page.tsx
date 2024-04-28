@@ -1,6 +1,7 @@
-import { getLinkByPath } from '@/server/methods/link';
-import { NextPage } from 'next';
+import type { NextPage } from 'next';
 import { redirect } from 'next/navigation';
+
+import { getLinkByPath } from '@/server/methods/link';
 
 type Props = {
   params: { slug: string };
