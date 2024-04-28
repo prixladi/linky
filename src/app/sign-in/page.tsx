@@ -50,7 +50,7 @@ const SignIn: NextPage = () => {
       <p className="pt-3 text-center text-neutral">
         Don&apos;t have an account yet?
         <Link className="text-secondary underline pl-1" href="/sign-up">
-          Registe
+          Register
         </Link>
       </p>
 
