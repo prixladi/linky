@@ -8,8 +8,8 @@ import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import type { SubmitHandler } from 'react-hook-form';
 
-import { loginUserAction } from '@/lib/server/actions';
 import { Button, Heading, Input } from '@/components';
+import { loginUserAction } from '@/lib/server/actions';
 
 type FormValues = { email: string; password: string };
 

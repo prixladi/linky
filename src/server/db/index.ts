@@ -1,5 +1,5 @@
-import { drizzle } from 'drizzle-orm/vercel-postgres';
 import { VercelClient } from '@vercel/postgres';
+import { drizzle } from 'drizzle-orm/vercel-postgres';
 
 import * as schema from './schema';
 

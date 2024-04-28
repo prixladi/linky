@@ -3,7 +3,8 @@ import { SignJWT, jwtVerify } from 'jose';
 
 import { db } from '@/server/db';
 import { user } from '@/server/db/schema';
-import { RefreshTokenPayload } from './types';
+
+import type { RefreshTokenPayload } from './types';
 
 type RefreshData = {
   refreshToken: string;
@@ -58,7 +59,7 @@ const refreshUserToken = async ({ refreshToken }: RefreshData): Promise<Result> 
   })
     .setProtectedHeader({
       alg: 'HS256',
-    }) 
+    })
     .setIssuedAt()
     .setExpirationTime('5 minutes')
     .sign(secretKey);

@@ -1,6 +1,7 @@
+import { and, eq } from 'drizzle-orm';
+
 import { db } from '@/server/db';
 import { link } from '@/server/db/schema';
-import { and, eq } from 'drizzle-orm';
 
 const getUserLinks = async (userId: number) => {
   const links = await db

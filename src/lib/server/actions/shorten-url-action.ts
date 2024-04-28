@@ -1,8 +1,9 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
+
 import { getCurrentUser } from '@/lib/server';
 import { createShortenedUrl } from '@/server/methods/link';
-import { revalidatePath } from 'next/cache';
 
 const shortenUrlAction = async (url: string) => {
   const currentUser = await getCurrentUser();

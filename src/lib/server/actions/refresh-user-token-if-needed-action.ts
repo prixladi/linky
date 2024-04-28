@@ -1,7 +1,9 @@
 'use server';
 
-import { refreshUserToken } from '@/server/methods/user';
 import { cookies } from 'next/headers';
+
+import { refreshUserToken } from '@/server/methods/user';
+
 import { getTokenExpiration } from '..';
 
 type Result = {

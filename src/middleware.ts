@@ -11,7 +11,7 @@ export const middleware = async (request: NextRequest) => {
   const accessToken = request.cookies.get('accessToken')?.value;
   if (!accessToken) return NextResponse.redirect(new URL('/sign-up', request.url));
 
-  let user = await getUserFromToken({ accessToken });
+  const user = await getUserFromToken({ accessToken });
   if (!user) {
     const refreshToken = request.cookies.get('refreshToken')?.value;
     if (!refreshToken) return NextResponse.redirect(new URL('/sign-in'));

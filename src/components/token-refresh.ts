@@ -1,18 +1,19 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
+
 import { wait } from '@/lib';
 import { refreshUserTokenIfNeededAction } from '@/lib/server/actions';
-import { useEffect, useRef } from 'react';
 
 const TokenRefresh: React.FC = () => {
   const running = useRef(false);
 
   useEffect(() => {
     const refreshLoop = async () => {
-      while (true) {
-        const { nextCheckInS } = await refreshUserTokenIfNeededAction();
+      while (running.current) {
+        const { nextCheckInS } = await refreshUserTokenIfNeededAction(); // eslint-disable-line no-await-in-loop
         if (!nextCheckInS) break;
-        await wait(nextCheckInS * 1000);
+        await wait(nextCheckInS * 1000); // eslint-disable-line no-await-in-loop
       }
     };
 
@@ -20,6 +21,10 @@ const TokenRefresh: React.FC = () => {
       running.current = true;
       refreshLoop().catch(console.error);
     }
+
+    return () => {
+      running.current = false;
+    };
   }, []);
 
   return null;

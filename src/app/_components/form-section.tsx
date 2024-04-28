@@ -8,9 +8,9 @@ import type { SubmitHandler } from 'react-hook-form';
 
 import { Button, Input, InputError } from '@/components';
 import { isValidUrl, makeShortenedLink } from '@/lib';
+import { shortenUrlAction } from '@/lib/server/actions';
 
 import ResultSection from './result-section';
-import { shortenUrlAction } from '@/lib/server/actions';
 
 type FormValues = { url: string };
 

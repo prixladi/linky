@@ -1,6 +1,6 @@
 import { jwtVerify } from 'jose';
 
-import { AccessTokenPayload } from './types';
+import type { AccessTokenPayload } from './types';
 
 type GetCurrentUserData = {
   accessToken: string;
