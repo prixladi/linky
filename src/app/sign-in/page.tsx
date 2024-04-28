@@ -8,9 +8,8 @@ import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import type { SubmitHandler } from 'react-hook-form';
 
-import { loginAction } from '@/actions';
+import { loginUserAction } from '@/lib/server/actions';
 import { Button, Heading, Input } from '@/components';
-
 
 type FormValues = { email: string; password: string };
 
@@ -26,7 +25,7 @@ const SignIn: NextPage = () => {
 
   const onSubmit: SubmitHandler<FormValues> = useCallback(
     async (values) => {
-      await loginAction(values)
+      await loginUserAction(values)
         .then(async (res) => {
           if (res) {
             setError('email', { message: 'Invalid email or password' });

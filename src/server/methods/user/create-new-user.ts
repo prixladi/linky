@@ -17,7 +17,7 @@ type Result =
       error: 'conflict';
     };
 
-const createNew = async ({ email, password }: CreateNewData): Promise<Result> => {
+const createNewUser = async ({ email, password }: CreateNewData): Promise<Result> => {
   const lowercaseEmail = email.toLowerCase();
 
   const [existingUser] = await db
@@ -42,4 +42,4 @@ const createNew = async ({ email, password }: CreateNewData): Promise<Result> =>
   return { id: insertedUser[0].id };
 };
 
-export default createNew;
+export default createNewUser;

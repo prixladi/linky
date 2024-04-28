@@ -8,11 +8,8 @@ import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import type { SubmitHandler } from 'react-hook-form';
 
-import { loginAction } from '@/actions';
+import { loginUserAction, registerUserAction } from '@/lib/server/actions';
 import { Button, Heading, Input } from '@/components';
-
-import { registerAction } from './_actions';
-
 
 type FormValues = { email: string; password: string };
 
@@ -28,7 +25,7 @@ const SignUp: NextPage = () => {
 
   const onSubmit: SubmitHandler<FormValues> = useCallback(
     async (values) => {
-      await registerAction(values)
+      await registerUserAction(values)
         .then(async (res) => {
           if ('error' in res) {
             setError('email', {
@@ -37,7 +34,7 @@ const SignUp: NextPage = () => {
             return;
           }
 
-          await loginAction(values);
+          await loginUserAction(values);
 
           router.push('/dashboard');
         })

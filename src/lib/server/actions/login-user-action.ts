@@ -2,7 +2,7 @@
 
 import { cookies } from 'next/headers';
 
-import { login } from '@/server/methods/user';
+import { loginUser } from '@/server/methods/user';
 
 type LoginData = {
   email: string;
@@ -10,7 +10,7 @@ type LoginData = {
 };
 
 const loginAction = async (data: LoginData) => {
-  const result = await login(data);
+  const result = await loginUser(data);
   if ('error' in result) return result;
 
   const { accessToken, refreshToken } = result;
