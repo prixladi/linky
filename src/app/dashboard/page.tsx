@@ -1,8 +1,7 @@
 import type { NextPage } from 'next';
 
 import { Heading } from '@/components';
-import { getCurrentUserLinks, getUserLinks } from '@/lib/server';
-import { protect } from '@/lib/server/protect';
+import { getCurrentUserLinks } from '@/lib/server';
 
 const Dashboard: NextPage = async () => {
   const links = await getCurrentUserLinks();

@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
+// Need to import from files directly because barrel export exports bcrypt that is not available in edge runtime
 import getUserFromToken from './server/methods/user/get-user-from-token';
 import refreshUserToken from './server/methods/user/refresh-user-token';
 
