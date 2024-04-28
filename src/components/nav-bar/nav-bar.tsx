@@ -15,7 +15,7 @@ const NavBar = () => (
 
       <div className="flex-none gap-2">
         <div className="dropdown dropdown-end">
-          <div role="button" className="btn m-1">
+          <div tabIndex={0} role="button" className="btn m-1">
             Theme
             <svg
               width="12px"
@@ -27,7 +27,7 @@ const NavBar = () => (
               <path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z" />
             </svg>
           </div>
-          <ul className="dropdown-content z-[1] p-2 shadow-2xl bg-base-300 rounded-box w-52">
+          <ul tabIndex={0} className="dropdown-content z-[1] p-2 shadow-2xl bg-base-300 rounded-box w-52">
             <li>
               <input
                 type="radio"
