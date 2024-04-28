@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
 import './globals.css';
-import { NavBar } from '@/components';
+import { NavBar, TokenRefresh } from '@/components';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,6 +20,7 @@ const RootLayout = ({
     <body className={inter.className}>
       <NavBar />
       {children}
+      <TokenRefresh />
     </body>
   </html>
 );

@@ -8,3 +8,8 @@ export type RefreshTokenPayload = {
   id: number;
   type: 'refresh';
 };
+
+export type TokenPair = {
+  accessToken: string;
+  refreshToken: string;
+};

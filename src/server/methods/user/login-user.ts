@@ -13,6 +13,7 @@ type LoginData = {
 type Result =
   | {
       accessToken: string;
+      accessTokenExpirationS: number;
       refreshToken: string;
     }
   | {
@@ -52,12 +53,12 @@ const loginUser = async ({ email, password }: LoginData): Promise<Result> => {
   })
     .setProtectedHeader({
       alg: 'HS256',
-    }) // algorithm
+    })
     .setIssuedAt()
-    .setExpirationTime('4 weeks')
+    .setExpirationTime('2 weeks')
     .sign(secretKey);
 
-  return { accessToken, refreshToken };
+  return { accessToken, accessTokenExpirationS: 5 * 60, refreshToken };
 };
 
 export default loginUser;
