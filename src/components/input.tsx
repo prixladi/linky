@@ -3,9 +3,9 @@ import type { HTMLInputTypeAttribute } from 'react';
 import clsx from 'clsx';
 import type { UseFormRegisterReturn } from 'react-hook-form';
 
-import { Icon } from '../icons';
-import type { IconType } from '../icons/icon';
-import InputError from '../input-error';
+import { Icon } from './icons';
+import type { IconType } from './icons/icon';
+import InputError from './input-error';
 
 type Props = {
   register: UseFormRegisterReturn<any>;
