@@ -12,7 +12,7 @@ const createShortenedUrl = async ({ url, userId }: CreateShortenedUrlData): Prom
   const path = generateRandomPath(5);
   const insertedLink = await db
     .insert(link)
-    .values({ url, path, user: userId, createdAt: new Date() })
+    .values({ url, path, userId: userId, createdAt: new Date() })
     .returning();
 
   return {

@@ -8,7 +8,7 @@ type Props = {
 };
 
 const Link: NextPage<Props> = async ({ params }) => {
-  const { url } = await getLinkByPath(params.slug);
+  const { url } = await getLinkByPath(params.slug, { incrementStat: true });
   redirect(url ?? '/');
 };
 

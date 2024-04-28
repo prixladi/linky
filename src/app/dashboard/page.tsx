@@ -7,14 +7,14 @@ const Dashboard: NextPage = async () => {
   const links = await getCurrentUserLinks();
 
   return (
-    <div className="pt-24 md:pt-36 w-full px-3 m-auto bg-transparent max-w-lg">
+    <div className="pt-24 md:pt-36 pb-8 w-full px-3 m-auto bg-transparent max-w-lg">
       <Heading text="Dashboard" />
       <p className="py-6 text-center">
         Your place for managing your shortened links and checking statistics.
       </p>
 
       <div className="flex gap-2 flex-col">
-        {links.map(({ id, url, path }) => (
+        {links.map(({ id, url, path, totalHitCount, hitRecords }) => (
           <div
             key={id}
             className="card card-compact bg-base-100 shadow-md flex-col sm:flex-row justify-between"
@@ -23,7 +23,7 @@ const Dashboard: NextPage = async () => {
               <h2 className="card-title text-md mb-0">
                 <div className="badge badge-neutral">/{path}</div>
                 <button className="badge badge-neutral">
-                  Copy <Icon type="copy" className='w-4 h-4 pl-1' />
+                  Copy <Icon type="copy" className="w-4 h-4 pl-1" />
                 </button>
               </h2>
               <p className="text-ellipsis  overflow-hidden sm:max-w-[450px] whitespace-nowrap">
@@ -38,8 +38,8 @@ const Dashboard: NextPage = async () => {
                 <div>
                   <div className="stat">
                     <div className="stat-title">Total Page Hits</div>
-                    <div className="stat-value text-4xl">89,40</div>
-                    <div className="stat-desc">50% of it in last day</div>
+                    <div className="stat-value text-4xl">{totalHitCount}</div>
+                    <div className="stat-desc">50% of them in last day</div>
                   </div>
                 </div>
               </div>
