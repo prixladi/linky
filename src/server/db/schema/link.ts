@@ -12,9 +12,7 @@ export const link = pgTable(
     createdAt: timestamp('created_at', { mode: 'date' }).notNull(),
     userId: integer('user_id').references(() => user.id),
   },
-  (table) => {
-    return {
+  (table) => ({
       userIdIdx: index('user_id_idx').on(table.userId),
-    };
-  },
+    }),
 );

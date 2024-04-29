@@ -2,8 +2,8 @@
 
 import { cookies } from 'next/headers';
 
-import { loginUser } from '@/server/methods/user';
 import { getTokenCookieOptions } from '@/lib';
+import { loginUser } from '@/server/methods/user';
 
 type LoginData = {
   email: string;

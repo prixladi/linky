@@ -1,11 +1,12 @@
 import { VercelClient } from '@vercel/postgres';
 import { drizzle } from 'drizzle-orm/vercel-postgres';
 
+import config from '@/server-config';
+
 import * as schema from './schema';
 
 const client = new VercelClient({
-  connectionString:
-    'postgres://default:kioTASRjX78m@ep-bitter-hill-a2zytdwe.eu-central-1.aws.neon.tech:5432/verceldb?sslmode=require',
+  connectionString: config.dbConnectionString,
 });
 
 (async () => {

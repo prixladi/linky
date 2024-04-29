@@ -2,18 +2,12 @@ import { and, asc, eq } from 'drizzle-orm';
 
 import { db } from '@/server/db';
 import { link, stat } from '@/server/db/schema';
-import { LinkWithStats } from './types';
 
-type DbRecord = {
-  id: number;
-  url: string;
-  path: string;
-  createdAt: Date;
-  date: Date | null;
-  hitCount: number | null;
-};
+import type { LinkWithStats } from './types';
 
-const getUserLinks = async (userId: number) => {
+type Response = LinkWithStats[];
+
+const getUserLinks = async (userId: number): Promise<Response> => {
   const dbRecords = await db
     .select({
       id: link.id,
@@ -28,36 +22,43 @@ const getUserLinks = async (userId: number) => {
     .where(and(eq(link.userId, userId), eq(link.deleted, false)))
     .orderBy(asc(stat.date));
 
-  return convertLinks(dbRecords).sort((a, b) => {
-    return b.createdAt.getTime() - a.createdAt.getTime();
-  });
+  return convertLinks(dbRecords).sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
 };
 
-const convertLinks = (links: DbRecord[]): LinkWithStats[] => {
-  const linkMap: Record<number, LinkWithStats> = {};
+type DbRecord = {
+  id: number;
+  url: string;
+  path: string;
+  createdAt: Date;
+  date: Date | null;
+  hitCount: number | null;
+};
 
-  for (const link of links) {
-    if (!linkMap[link.id]) {
-      linkMap[link.id] = {
-        id: link.id,
-        url: link.url,
-        path: link.path,
-        createdAt: link.createdAt,
+const convertLinks = (dbRecords: DbRecord[]): LinkWithStats[] => {
+  const result = dbRecords.reduce<Record<number, LinkWithStats>>((linkMap, dbRecord) => {
+    if (!linkMap[dbRecord.id]) {
+      linkMap[dbRecord.id] = {
+        id: dbRecord.id,
+        url: dbRecord.url,
+        path: dbRecord.path,
+        createdAt: dbRecord.createdAt,
         hitRecords: [],
         totalHitCount: 0,
       };
     }
 
-    if (link.hitCount && link.date) {
-      linkMap[link.id].totalHitCount += link.hitCount;
-      linkMap[link.id].hitRecords.push({
-        hitCount: link.hitCount,
-        date: link.date,
+    if (dbRecord.hitCount && dbRecord.date) {
+      linkMap[dbRecord.id].totalHitCount += dbRecord.hitCount; 
+      linkMap[dbRecord.id].hitRecords.push({
+        hitCount: dbRecord.hitCount,
+        date: dbRecord.date,
       });
     }
-  }
 
-  return Object.values(linkMap);
+    return linkMap;
+  }, {});
+
+  return Object.values(result);
 };
 
 export default getUserLinks;

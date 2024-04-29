@@ -3,11 +3,11 @@ import { eq, sql } from 'drizzle-orm';
 import { db } from '../../db';
 import { link, stat } from '../../db/schema';
 
-type Result = { url?: string };
-
 type Options = {
   incrementStat: boolean;
 };
+
+type Result = { url?: string };
 
 const getLinkByPath = async (path: string, { incrementStat }: Options): Promise<Result> => {
   const [dbLink] = await db.select().from(link).where(eq(link.path, path));

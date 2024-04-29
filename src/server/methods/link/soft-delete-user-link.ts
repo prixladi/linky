@@ -1,5 +1,8 @@
 import { and, eq } from 'drizzle-orm';
 
+import type { BadRequest} from '@/server/utils/status-errors';
+import { makeBadRequest } from '@/server/utils/status-errors';
+
 import { db } from '../../db';
 import { link } from '../../db/schema';
 
@@ -8,7 +11,7 @@ type Data = {
   userId: number;
 };
 
-type Result = { success: boolean };
+type Result = { id: number } | BadRequest;
 
 const softDeleteUserLink = async ({ id, userId }: Data): Promise<Result> => {
   const [result] = await db
@@ -17,7 +20,8 @@ const softDeleteUserLink = async ({ id, userId }: Data): Promise<Result> => {
     .where(and(eq(link.id, id), eq(link.userId, userId)))
     .returning();
 
-  return { success: Boolean(result) };
+  if (!result) return makeBadRequest();
+  return { id: result.id };
 };
 
 export default softDeleteUserLink;

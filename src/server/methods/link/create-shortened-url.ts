@@ -1,18 +1,18 @@
 import { db } from '../../db';
 import { link } from '../../db/schema';
 
-type CreateShortenedUrlData = {
+type Data = {
   url: string;
   userId?: number;
 };
 
 type Result = { path: string };
 
-const createShortenedUrl = async ({ url, userId }: CreateShortenedUrlData): Promise<Result> => {
+const createShortenedUrl = async ({ url, userId }: Data): Promise<Result> => {
   const path = generateRandomPath(5);
   const insertedLink = await db
     .insert(link)
-    .values({ url, path, userId: userId, createdAt: new Date() })
+    .values({ url, path, userId, createdAt: new Date() })
     .returning();
 
   return {

@@ -1,5 +1,6 @@
-import clsx from 'clsx';
 import type { MouseEventHandler } from 'react';
+
+import clsx from 'clsx';
 
 type Props = React.PropsWithChildren<{
   onClick?: MouseEventHandler<HTMLButtonElement>;

@@ -1,11 +1,13 @@
 import bcrypt from 'bcrypt';
 import { eq } from 'drizzle-orm';
-import { SignJWT } from 'jose';
 
 import { db } from '@/server/db';
 import { user } from '@/server/db/schema';
+import { generateAccessToken, generateRefreshToken } from '@/server/utils/jwt';
+import type { BadRequest} from '@/server/utils/status-errors';
+import { makeBadRequest } from '@/server/utils/status-errors';
 
-type LoginData = {
+type Data = {
   email: string;
   password: string;
 };
@@ -16,11 +18,9 @@ type Result =
       accessTokenExpirationS: number;
       refreshToken: string;
     }
-  | {
-      error: 'badRequest';
-    };
+  | BadRequest;
 
-const loginUser = async ({ email, password }: LoginData): Promise<Result> => {
+const loginUser = async ({ email, password }: Data): Promise<Result> => {
   const lowercaseEmail = email.toLowerCase();
 
   const [existingUser] = await db
@@ -30,35 +30,24 @@ const loginUser = async ({ email, password }: LoginData): Promise<Result> => {
     .limit(1);
 
   if (!existingUser || !(await bcrypt.compare(password, existingUser.passwordHash))) {
-    return { error: 'badRequest' };
+    return makeBadRequest();
   }
 
-  const secretKey = Uint8Array.from('shhhhh'.split('').map((letter) => letter.charCodeAt(0)));
-
-  const accessToken = await new SignJWT({
+  const accessTokenResult = await generateAccessToken({
     id: existingUser.id,
     email: existingUser.email,
-    type: 'access',
-  })
-    .setProtectedHeader({
-      alg: 'HS256',
-    }) // algorithm
-    .setIssuedAt()
-    .setExpirationTime('5 minutes')
-    .sign(secretKey);
+  });
 
-  const refreshToken = await new SignJWT({
+  const refreshTokenResult = await generateRefreshToken({
     id: existingUser.id,
-    type: 'refresh',
-  })
-    .setProtectedHeader({
-      alg: 'HS256',
-    })
-    .setIssuedAt()
-    .setExpirationTime('2 weeks')
-    .sign(secretKey);
+    email: existingUser.email,
+  });
 
-  return { accessToken, accessTokenExpirationS: 5 * 60, refreshToken };
+  return {
+    accessToken: accessTokenResult.token,
+    refreshToken: refreshTokenResult.token,
+    accessTokenExpirationS: accessTokenResult.duration,
+  };
 };
 
 export default loginUser;

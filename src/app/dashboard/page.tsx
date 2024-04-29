@@ -1,8 +1,9 @@
 import type { NextPage } from 'next';
+import { Suspense } from 'react';
 
 import { Heading } from '@/components';
+
 import { LinksSection } from './_components';
-import { Suspense } from 'react';
 
 const Dashboard: NextPage = async () => (
   <div className="pt-24 md:pt-36 pb-8 w-full px-3 m-auto bg-transparent max-w-lg">

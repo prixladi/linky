@@ -1,12 +1,12 @@
 import { eq } from 'drizzle-orm';
-import { SignJWT, jwtVerify } from 'jose';
 
 import { db } from '@/server/db';
 import { user } from '@/server/db/schema';
+import { generateAccessToken, verifyRefreshToken } from '@/server/utils/jwt';
+import type { BadRequest} from '@/server/utils/status-errors';
+import { makeBadRequest } from '@/server/utils/status-errors';
 
-import type { RefreshTokenPayload } from './types';
-
-type RefreshData = {
+type Data = {
   refreshToken: string;
 };
 
@@ -15,56 +15,28 @@ type Result =
       accessToken: string;
       accessTokenExpirationS: number;
     }
-  | {
-      error: 'badRequest';
-    };
+  | BadRequest;
 
-const refreshUserToken = async ({ refreshToken }: RefreshData): Promise<Result> => {
-  const secretKey = Uint8Array.from('shhhhh'.split('').map((letter) => letter.charCodeAt(0)));
+const refreshUserToken = async ({ refreshToken }: Data): Promise<Result> => {
+  const payload = await verifyRefreshToken(refreshToken);
+  if (!payload) return makeBadRequest();
 
-  const result = await jwtVerify<RefreshTokenPayload>(refreshToken, secretKey).catch((err) => {
-    console.debug(err);
-    return null;
-  });
-
-  if (!result) return { error: 'badRequest' };
-
-  if (result.payload.type !== 'refresh') {
-    console.debug(
-      `Used wrong token type for user authorization, expected 'refresh' got '${result.payload.type}'`,
-    );
-    return {
-      error: 'badRequest',
-    };
-  }
-
-  const [existingUser] = await db
-    .select()
-    .from(user)
-    .where(eq(user.id, result.payload.id))
-    .limit(1);
+  const [existingUser] = await db.select().from(user).where(eq(user.id, payload.id)).limit(1);
 
   if (!existingUser) {
-    return { error: 'badRequest' };
+    return makeBadRequest();
   }
 
   if (!existingUser.active) {
-    return { error: 'badRequest' };
+    return makeBadRequest();
   }
 
-  const accessToken = await new SignJWT({
-    id: result.payload.id,
-    email: result.payload.email,
-    type: 'access',
-  })
-    .setProtectedHeader({
-      alg: 'HS256',
-    })
-    .setIssuedAt()
-    .setExpirationTime('5 minutes')
-    .sign(secretKey);
+  const accessTokenResult = await generateAccessToken(payload);
 
-  return { accessToken, accessTokenExpirationS: 5 * 60 };
+  return {
+    accessToken: accessTokenResult.token,
+    accessTokenExpirationS: accessTokenResult.duration,
+  };
 };
 
 export default refreshUserToken;

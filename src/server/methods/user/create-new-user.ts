@@ -3,8 +3,10 @@ import { eq } from 'drizzle-orm';
 
 import { db } from '@/server/db';
 import { user } from '@/server/db/schema';
+import type { Conflict} from '@/server/utils/status-errors';
+import { makeConflict } from '@/server/utils/status-errors';
 
-type CreateNewData = {
+type Data = {
   email: string;
   password: string;
 };
@@ -13,11 +15,9 @@ type Result =
   | {
       id: number;
     }
-  | {
-      error: 'conflict';
-    };
+  | Conflict;
 
-const createNewUser = async ({ email, password }: CreateNewData): Promise<Result> => {
+const createNewUser = async ({ email, password }: Data): Promise<Result> => {
   const lowercaseEmail = email.toLowerCase();
 
   const [existingUser] = await db
@@ -26,7 +26,7 @@ const createNewUser = async ({ email, password }: CreateNewData): Promise<Result
     .where(eq(user.email, lowercaseEmail))
     .limit(1);
 
-  if (existingUser) return { error: 'conflict' };
+  if (existingUser) return makeConflict();
 
   const passwordHash = await bcrypt.hash(password, 10);
   const insertedUser = await db

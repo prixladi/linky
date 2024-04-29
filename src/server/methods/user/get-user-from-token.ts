@@ -1,37 +1,25 @@
-import { jwtVerify } from 'jose';
+import { verifyAccessToken } from '@/server/utils/jwt';
+import type { BadRequest} from '@/server/utils/status-errors';
+import { makeBadRequest } from '@/server/utils/status-errors';
 
-import type { AccessTokenPayload } from './types';
-
-type GetCurrentUserData = {
+type Data = {
   accessToken: string;
 };
 
-type Result = {
-  id: number;
-  email: string;
-};
+type Result =
+  | {
+      id: number;
+      email: string;
+    }
+  | BadRequest;
 
-const getUserFromToken = async ({
-  accessToken,
-}: GetCurrentUserData): Promise<Result | undefined> => {
-  const secretKey = Uint8Array.from('shhhhh'.split('').map((letter) => letter.charCodeAt(0)));
-
-  const result = await jwtVerify<AccessTokenPayload>(accessToken, secretKey).catch((err) => {
-    console.debug(err);
-    return null;
-  });
-
-  if (!result) return undefined;
-  if (result.payload.type !== 'access') {
-    console.debug(
-      `Used wrong token type for user authorization, expected 'access' got '${result.payload.type}'`,
-    );
-    return undefined;
-  }
+const getUserFromToken = async ({ accessToken }: Data): Promise<Result> => {
+  const payload = await verifyAccessToken(accessToken);
+  if (!payload) return makeBadRequest();
 
   return {
-    id: result.payload.id,
-    email: result.payload.email,
+    id: payload.id,
+    email: payload.email,
   };
 };
 

@@ -1,10 +1,11 @@
 'use client';
 
+import { useState } from 'react';
+
 import { Button, Icon } from '@/components';
 import { copyToClipboard, makeShortenedLink } from '@/lib';
 import { softDeleteLinkAction } from '@/lib/server/actions';
-import { LinkWithStats } from '@/lib/server/get-current-user-links';
-import { useState } from 'react';
+import type { LinkWithStats } from '@/lib/server/get-current-user-links';
 
 type Props = {
   links: LinkWithStats[];

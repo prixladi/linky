@@ -2,10 +2,10 @@
 
 import { cookies } from 'next/headers';
 
+import { getTokenCookieOptions } from '@/lib';
 import { refreshUserToken } from '@/server/methods/user';
 
 import { getTokenExpiration } from '..';
-import { getTokenCookieOptions } from '@/lib';
 
 type Result = {
   refreshed: boolean;

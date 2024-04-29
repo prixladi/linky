@@ -1,7 +1,7 @@
 import { getUserLinks } from '@/server/methods/link';
+import type { LinkWithStats } from '@/server/methods/link/types';
 
 import getCurrentUser from './get-current-user';
-import { LinkWithStats } from '@/server/methods/link/types';
 
 export type { LinkWithStats };
 
