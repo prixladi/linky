@@ -5,6 +5,7 @@ import { cookies } from 'next/headers';
 import { refreshUserToken } from '@/server/methods/user';
 
 import { getTokenExpiration } from '..';
+import { getTokenCookieOptions } from '@/lib';
 
 type Result = {
   refreshed: boolean;
@@ -24,7 +25,8 @@ const refreshUserTokenIfNeededAction = async (): Promise<Result> => {
   const result = await refreshUserToken({ refreshToken });
   if ('error' in result) return { refreshed: false, nextCheckInS: getNextCheckInS() };
 
-  cookies().set('accessToken', result.accessToken);
+  cookies().set('accessToken', result.accessToken, getTokenCookieOptions());
+
   return {
     refreshed: true,
     nextCheckInS: getNextCheckInS(result.accessTokenExpirationS),

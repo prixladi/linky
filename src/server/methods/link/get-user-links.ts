@@ -2,15 +2,7 @@ import { and, asc, eq } from 'drizzle-orm';
 
 import { db } from '@/server/db';
 import { link, stat } from '@/server/db/schema';
-
-type LinkWithStats = {
-  id: number;
-  path: string;
-  url: string;
-  createdAt: Date;
-  totalHitCount: number;
-  hitRecords: { hitCount: number; date: Date }[];
-};
+import { LinkWithStats } from './types';
 
 type DbRecord = {
   id: number;

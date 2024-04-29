@@ -3,6 +3,7 @@
 import { cookies } from 'next/headers';
 
 import { loginUser } from '@/server/methods/user';
+import { getTokenCookieOptions } from '@/lib';
 
 type LoginData = {
   email: string;
@@ -15,8 +16,8 @@ const loginAction = async (data: LoginData) => {
 
   const { accessToken, refreshToken } = result;
 
-  cookies().set('accessToken', accessToken);
-  cookies().set('refreshToken', refreshToken);
+  cookies().set('accessToken', accessToken, getTokenCookieOptions());
+  cookies().set('refreshToken', refreshToken, getTokenCookieOptions());
 
   return undefined;
 };

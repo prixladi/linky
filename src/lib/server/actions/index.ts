@@ -3,3 +3,4 @@ export { default as logoutUserAction } from './logout-user-action';
 export { default as registerUserAction } from './register-user-action';
 export { default as shortenUrlAction } from './shorten-url-action';
 export { default as refreshUserTokenIfNeededAction } from './refresh-user-token-if-needed-action';
+export { default as softDeleteLinkAction } from './soft-delete-link-action';

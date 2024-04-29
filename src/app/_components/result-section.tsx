@@ -1,6 +1,7 @@
 'use client';
 
 import { Icon } from '@/components';
+import { copyToClipboard } from '@/lib';
 
 type Props = { link?: string };
 
@@ -10,7 +11,7 @@ const ResultSection: React.FC<Props> = ({ link }) =>
       role="button"
       aria-hidden="true"
       onClick={() => {
-        if (link) navigator.clipboard.writeText(link);
+        if (link) copyToClipboard(link);
       }}
       className="animateShow flex gap-2 mt-5 bg-neutral text-neutral-content px-8 py-2 items-center justify-between rounded-xl cursor-pointer"
     >
