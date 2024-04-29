@@ -10,7 +10,7 @@ import { Button, Input, InputError } from '@/components';
 import { isValidUrl, makeShortenedLink } from '@/lib';
 import { shortenUrlAction } from '@/lib/server/actions';
 
-import ResultSection from './result-section';
+import ShortenResult from './shorten-result';
 
 type FormValues = { url: string };
 
@@ -79,7 +79,7 @@ const FormSection: React.FC = () => {
       </form>
 
       <InputError text={errors.url?.message} className="sm:flex hidden" />
-      <ResultSection link={result?.link} />
+      <ShortenResult link={result?.link} />
     </div>
   );
 };
