@@ -3,11 +3,18 @@ import { and, asc, eq } from 'drizzle-orm';
 import { db } from '@/server/db';
 import { link, stat } from '@/server/db/schema';
 
-import type { LinkWithStats } from './types';
-
 type Response = LinkWithStats[];
 
-const getUserLinks = async (userId: number): Promise<Response> => {
+export type LinkWithStats = {
+  id: number;
+  path: string;
+  url: string;
+  createdAt: Date;
+  totalHitCount: number;
+  hitRecords: { hitCount: number; date: Date }[];
+};
+
+const getUserLinksWithStats = async (userId: number): Promise<Response> => {
   const dbRecords = await db
     .select({
       id: link.id,
@@ -61,4 +68,4 @@ const convertLinks = (dbRecords: DbRecord[]): LinkWithStats[] => {
   return Object.values(result);
 };
 
-export default getUserLinks;
+export default getUserLinksWithStats;

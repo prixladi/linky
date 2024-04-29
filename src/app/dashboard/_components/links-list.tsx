@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { softDeleteLinkAction } from '@/lib/server/actions';
 import type { LinkWithStats } from '@/lib/server/get-current-user-links';
 
-import Link from './link-card';
+import LinkCard from './link-card';
 
 type Props = {
   links: LinkWithStats[];
@@ -17,7 +17,8 @@ const LinksList: React.FC<Props> = ({ links: inputLinks }) => {
   return (
     <div className="flex gap-2 flex-col">
       {links.map((link) => (
-        <Link
+        <LinkCard
+          key={link.id}
           link={link}
           onRemove={async () => {
             await softDeleteLinkAction(link.id);

@@ -12,10 +12,7 @@ type Props = {
 };
 
 const LinkCard: React.FC<Props> = ({ link: { id, path, url, ...stats }, onRemove }) => (
-  <div
-    key={id}
-    className="card card-compact bg-base-100 shadow-md flex-col sm:flex-row justify-between"
-  >
+  <div className="card card-compact bg-base-100 shadow-md flex-col sm:flex-row justify-between">
     <div className="card-body gap-1">
       <h2 className="card-title text-md mb-0">
         <div
