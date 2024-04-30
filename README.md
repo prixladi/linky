@@ -35,3 +35,8 @@ The project is using classic Next.js app router structure with `src` folder. Pag
         - `./server` - Bindings to server logics (`/src/server/methods`)
             - `./actions` - Next.js server actions
     - `./middleware.ts` - Next.js middleware handling protected routes
+
+## Application images
+
+![Home](misc/assets/home.png)
+![Dashboard](misc/assets/dashboard.png)
