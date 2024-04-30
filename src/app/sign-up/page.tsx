@@ -84,11 +84,11 @@ const SignUp: NextPage = () => {
           register={register('password', {
             required: {
               value: true,
-              message: 'You must provide password at least 5 characters long',
+              message: 'Password must be at least 5 chars long',
             },
             minLength: {
               value: 5,
-              message: 'You must provide password at least 5 characters long',
+              message: 'Password must be at least 5 chars long',
             },
           })}
         />

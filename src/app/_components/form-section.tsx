@@ -48,7 +48,7 @@ const FormSection: React.FC = () => {
     <div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex sm:flex-row flex-col gap-3 flex-auto items-center"
+        className="flex sm:flex-row flex-col gap-1 flex-auto items-center"
       >
         <div
           className={clsx('w-full', {
