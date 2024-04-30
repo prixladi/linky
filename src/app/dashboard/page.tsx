@@ -1,30 +1,46 @@
 import type { NextPage } from 'next';
 import { Suspense } from 'react';
 
-import { Heading } from '@/components';
+import { Button, Heading } from '@/components';
 
 import { LinksSection } from './_components';
+import { logoutUserAction } from '@/lib/server/actions';
+import { getCurrentUser } from '@/lib/server';
+import { redirect } from 'next/navigation';
 
-const Dashboard: NextPage = async () => (
-  <div className="pt-24 md:pt-36 pb-8 w-full px-3 m-auto bg-transparent max-w-lg">
-    <Heading text="Dashboard" />
-    <p className="py-6 text-center">
-      Your place for managing your shortened links and checking statistics.
-    </p>
+const Dashboard: NextPage = async () => {
+  const currentUser = await getCurrentUser();
+  if (!currentUser) redirect('/sign-in');
 
-    <Suspense
-      fallback={
-        <div className='flex justify-center'>
-          <span className="m-auto loading loading-ring loading-lg" />
-        </div>
-      }
-    >
-      <LinksSection />
-    </Suspense>
-    {/* <button type="submit" className="btn" onClick={() => logoutUserAction()}>
-        Logout
-      </button> */}
-  </div>
-);
+  return (
+    <div className="pt-24 md:pt-36 pb-8 w-full px-3 m-auto bg-transparent max-w-lg">
+      <Heading text="Dashboard" />
+
+      <div className="flex justify-center gap-1 items-center text-sm">
+        <p className="py-4 text-center italic">Currently logged in as {currentUser?.email}</p>
+
+        <form action={logoutUserAction}>
+          <Button variant="xs" type="submit" className='btn-primary'>
+            Logout
+          </Button>
+        </form>
+      </div>
+
+      <p className="pb-6 pt-4 text-center">
+        Your place for managing your shortened links and checking statistics.
+      </p>
+
+      <Suspense
+        fallback={
+          <div className="flex justify-center">
+            <span className="m-auto loading loading-ring loading-lg" />
+          </div>
+        }
+      >
+        <LinksSection />
+      </Suspense>
+    </div>
+  );
+};
 
 export default Dashboard;

@@ -6,7 +6,7 @@ type Props = React.PropsWithChildren<{
   onClick?: MouseEventHandler<HTMLButtonElement>;
   loading?: boolean;
   type: 'submit' | 'reset' | 'button';
-  variant?: 'sm' | 'md' | 'lg';
+  variant?: 'xs' | 'sm' | 'md' | 'lg';
   className?: string;
 }>;
 
@@ -28,6 +28,7 @@ const Button: React.FC<Props> = ({
         'btn-sm': variant === 'sm',
         'btn-md': variant === 'md',
         'btn-lg': variant === 'lg',
+        'btn-xs': variant === 'xs',
       },
       className,
     )}
