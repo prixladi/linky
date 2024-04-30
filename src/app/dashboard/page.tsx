@@ -1,12 +1,13 @@
 import type { NextPage } from 'next';
+import { redirect } from 'next/navigation';
 import { Suspense } from 'react';
 
 import { Button, Heading } from '@/components';
+import { getCurrentUser } from '@/lib/server';
+import { logoutUserAction } from '@/lib/server/actions';
 
 import { LinksSection } from './_components';
-import { logoutUserAction } from '@/lib/server/actions';
-import { getCurrentUser } from '@/lib/server';
-import { redirect } from 'next/navigation';
+
 
 const Dashboard: NextPage = async () => {
   const currentUser = await getCurrentUser();
@@ -20,7 +21,7 @@ const Dashboard: NextPage = async () => {
         <p className="py-4 text-center italic">Currently logged in as {currentUser?.email}</p>
 
         <form action={logoutUserAction}>
-          <Button variant="xs" type="submit" className='btn-primary'>
+          <Button variant="xs" type="submit" className="btn-primary">
             Logout
           </Button>
         </form>

@@ -13,6 +13,6 @@ export const link = pgTable(
     userId: integer('user_id').references(() => user.id),
   },
   (table) => ({
-      userIdIdx: index('user_id_idx').on(table.userId),
-    }),
+    userIdIdx: index('user_id_idx').on(table.userId),
+  }),
 );

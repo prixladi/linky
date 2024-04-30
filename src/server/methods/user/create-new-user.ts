@@ -3,7 +3,7 @@ import { eq } from 'drizzle-orm';
 
 import { db } from '@/server/db';
 import { user } from '@/server/db/schema';
-import type { Conflict} from '@/server/utils/status-errors';
+import type { Conflict } from '@/server/utils/status-errors';
 import { makeConflict } from '@/server/utils/status-errors';
 
 type Data = {

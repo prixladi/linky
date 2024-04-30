@@ -41,8 +41,7 @@ export const generateRefreshToken = async (data: TokenData) => {
   };
 };
 
-export const verifyAccessToken = async (accessToken: string) =>
-  verifyToken(accessToken, 'access');
+export const verifyAccessToken = async (accessToken: string) => verifyToken(accessToken, 'access');
 
 export const verifyRefreshToken = async (accessToken: string) =>
   verifyToken(accessToken, 'refresh');

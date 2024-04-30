@@ -4,7 +4,7 @@ import { eq } from 'drizzle-orm';
 import { db } from '@/server/db';
 import { user } from '@/server/db/schema';
 import { generateAccessToken, generateRefreshToken } from '@/server/utils/jwt';
-import type { BadRequest} from '@/server/utils/status-errors';
+import type { BadRequest } from '@/server/utils/status-errors';
 import { makeBadRequest } from '@/server/utils/status-errors';
 
 type Data = {

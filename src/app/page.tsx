@@ -11,7 +11,7 @@ const Home: NextPage = () => (
     <p className="py-6 text-center">
       Simple url shortener service with statistics for authenticated users.
     </p>
-    
+
     <FormSection />
   </main>
 );

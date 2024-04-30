@@ -67,7 +67,7 @@ const SignUp: NextPage = () => {
           register={register('email', {
             required: {
               value: true,
-              message: 'You must provide a valid email',
+              message: 'Provide a valid email',
             },
             pattern: {
               value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,

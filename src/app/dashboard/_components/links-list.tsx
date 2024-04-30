@@ -1,13 +1,12 @@
 'use client';
 
+import Link from 'next/link';
 import { useState } from 'react';
 
 import { softDeleteLinkAction } from '@/lib/server/actions';
 import type { LinkWithStats } from '@/lib/server/get-current-user-links';
 
 import LinkCard from './link-card';
-import { Button } from '@/components';
-import Link from 'next/link';
 
 type Props = {
   links: LinkWithStats[];

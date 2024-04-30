@@ -1,5 +1,5 @@
 import { verifyAccessToken } from '@/server/utils/jwt';
-import type { BadRequest} from '@/server/utils/status-errors';
+import type { BadRequest } from '@/server/utils/status-errors';
 import { makeBadRequest } from '@/server/utils/status-errors';
 
 type Data = {

@@ -55,7 +55,7 @@ const convertLinks = (dbRecords: DbRecord[]): LinkWithStats[] => {
     }
 
     if (dbRecord.hitCount && dbRecord.date) {
-      linkMap[dbRecord.id].totalHitCount += dbRecord.hitCount; 
+      linkMap[dbRecord.id].totalHitCount += dbRecord.hitCount;
       linkMap[dbRecord.id].hitRecords.push({
         hitCount: dbRecord.hitCount,
         date: dbRecord.date,

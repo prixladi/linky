@@ -1,5 +1,5 @@
 import { getUserLinksWithStats } from '@/server/methods/stats';
-import { LinkWithStats } from '@/server/methods/stats/get-user-links-with-stats';
+import type { LinkWithStats } from '@/server/methods/stats/get-user-links-with-stats';
 
 import getCurrentUser from './get-current-user';
 

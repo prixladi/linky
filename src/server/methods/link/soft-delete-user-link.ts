@@ -1,6 +1,6 @@
 import { and, eq } from 'drizzle-orm';
 
-import type { BadRequest} from '@/server/utils/status-errors';
+import type { BadRequest } from '@/server/utils/status-errors';
 import { makeBadRequest } from '@/server/utils/status-errors';
 
 import { db } from '../../db';

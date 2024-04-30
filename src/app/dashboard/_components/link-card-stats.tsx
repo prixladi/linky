@@ -18,7 +18,9 @@ const LinkCardStats: React.FC<Props> = ({ stats: { hitRecords, totalHitCount } }
       <div className="stat">
         <div className="stat-title">Total Page Hits</div>
         <div className="stat-value text-4xl">{totalHitCount}</div>
-        {lastDayPercentage && <div className="stat-desc">{lastDayPercentage}% of them in last day</div>}
+        {lastDayPercentage && (
+          <div className="stat-desc">{lastDayPercentage}% of them in last day</div>
+        )}
       </div>
     </div>
   );

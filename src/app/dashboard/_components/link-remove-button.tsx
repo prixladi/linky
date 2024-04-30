@@ -1,7 +1,8 @@
 'use client';
 
-import { Button } from '@/components';
 import { useCallback, useRef } from 'react';
+
+import { Button } from '@/components';
 
 type Props = {
   path: string;

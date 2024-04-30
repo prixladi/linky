@@ -4,9 +4,9 @@ type StatusError<T extends string> = {
 };
 
 const makeStatusError = <T extends string>(error: T, message?: string) => ({
-    error,
-    message,
-  });
+  error,
+  message,
+});
 
 export type BadRequest = StatusError<'badRequest'>;
 export type Conflict = StatusError<'conflict'>;
