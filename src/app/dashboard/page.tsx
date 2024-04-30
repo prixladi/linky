@@ -12,7 +12,13 @@ const Dashboard: NextPage = async () => (
       Your place for managing your shortened links and checking statistics.
     </p>
 
-    <Suspense>
+    <Suspense
+      fallback={
+        <div className='flex justify-center'>
+          <span className="m-auto loading loading-ring loading-lg" />
+        </div>
+      }
+    >
       <LinksSection />
     </Suspense>
     {/* <button type="submit" className="btn" onClick={() => logoutUserAction()}>
