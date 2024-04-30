@@ -20,7 +20,7 @@ type Result =
     }
   | BadRequest;
 
-const loginUser = async ({ email, password }: Data): Promise<Result> => {
+export const loginUser = async ({ email, password }: Data): Promise<Result> => {
   const lowercaseEmail = email.toLowerCase();
 
   const [existingUser] = await db
@@ -49,5 +49,3 @@ const loginUser = async ({ email, password }: Data): Promise<Result> => {
     accessTokenExpirationS: accessTokenResult.duration,
   };
 };
-
-export default loginUser;

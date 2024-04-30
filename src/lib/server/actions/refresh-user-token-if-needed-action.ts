@@ -12,7 +12,7 @@ type Result = {
   nextCheckInS?: number;
 };
 
-const refreshUserTokenIfNeededAction = async (): Promise<Result> => {
+export const refreshUserTokenIfNeededAction = async (): Promise<Result> => {
   const accessToken = cookies().get('accessToken')?.value;
   const accessTokenExpirationS = getTokenExpiration(accessToken);
   if (accessTokenExpirationS && accessTokenExpirationS > 60) {
@@ -37,5 +37,3 @@ const getNextCheckInS = (expInS?: number) => {
   if (!expInS || expInS < 0) return 30;
   return expInS - 20;
 };
-
-export default refreshUserTokenIfNeededAction;

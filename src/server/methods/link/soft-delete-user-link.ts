@@ -13,7 +13,7 @@ type Data = {
 
 type Result = { id: number } | BadRequest;
 
-const softDeleteUserLink = async ({ id, userId }: Data): Promise<Result> => {
+export const softDeleteUserLink = async ({ id, userId }: Data): Promise<Result> => {
   const [result] = await db
     .update(link)
     .set({ deleted: true })
@@ -23,5 +23,3 @@ const softDeleteUserLink = async ({ id, userId }: Data): Promise<Result> => {
   if (!result) return makeBadRequest();
   return { id: result.id };
 };
-
-export default softDeleteUserLink;

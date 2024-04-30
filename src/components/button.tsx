@@ -10,7 +10,7 @@ type Props = React.PropsWithChildren<{
   className?: string;
 }>;
 
-const Button: React.FC<Props> = ({
+export const Button: React.FC<Props> = ({
   onClick,
   loading,
   type,
@@ -36,5 +36,3 @@ const Button: React.FC<Props> = ({
     {loading ? <span className="loading loading-spinner" /> : children}
   </button>
 );
-
-export default Button;

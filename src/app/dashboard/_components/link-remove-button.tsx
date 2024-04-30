@@ -9,7 +9,7 @@ type Props = {
   onRemove: () => any;
 };
 
-const LinkRemoveButton: React.FC<Props> = ({ onRemove, path }) => {
+export const LinkRemoveButton: React.FC<Props> = ({ onRemove, path }) => {
   const modalRef = useRef<HTMLDialogElement>(null);
 
   const closeDialog = useCallback(() => modalRef.current?.close(), []);
@@ -57,5 +57,3 @@ const LinkRemoveButton: React.FC<Props> = ({ onRemove, path }) => {
     </>
   );
 };
-
-export default LinkRemoveButton;

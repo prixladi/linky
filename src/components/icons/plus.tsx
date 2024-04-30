@@ -1,4 +1,4 @@
-const PlusIcon = () => (
+export const PlusIcon = () => (
   <>
     <rect fill="none" height="50" width="50" />
     <line
@@ -23,5 +23,3 @@ const PlusIcon = () => (
     />
   </>
 );
-
-export default PlusIcon;

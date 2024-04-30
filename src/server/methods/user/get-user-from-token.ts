@@ -13,7 +13,7 @@ type Result =
     }
   | BadRequest;
 
-const getUserFromToken = async ({ accessToken }: Data): Promise<Result> => {
+export const getUserFromToken = async ({ accessToken }: Data): Promise<Result> => {
   const payload = await verifyAccessToken(accessToken);
   if (!payload) return makeBadRequest();
 
@@ -22,5 +22,3 @@ const getUserFromToken = async ({ accessToken }: Data): Promise<Result> => {
     email: payload.email,
   };
 };
-
-export default getUserFromToken;

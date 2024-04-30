@@ -1,3 +1,3 @@
-export { default as getCurrentUser } from './get-current-user';
-export { default as getCurrentUserLinks } from './get-current-user-links';
-export { default as getTokenExpiration } from './get-token-expiration';
+export * from './get-current-user';
+export * from './get-current-user-links';
+export * from './get-token-expiration';

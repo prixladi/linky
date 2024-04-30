@@ -1,8 +1,8 @@
 import { getCurrentUserLinks } from '@/lib/server';
 
-import LinksList from './links-list';
+import { LinksList } from './links-list';
 
-const LinksSection: React.FC = async () => {
+export const LinksSection: React.FC = async () => {
   const links = await getCurrentUserLinks();
 
   return (
@@ -11,5 +11,3 @@ const LinksSection: React.FC = async () => {
     </div>
   );
 };
-
-export default LinksSection;

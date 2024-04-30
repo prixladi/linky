@@ -5,7 +5,7 @@ import type { UseFormRegisterReturn } from 'react-hook-form';
 
 import { Icon } from './icons';
 import type { IconType } from './icons/icon';
-import InputError from './input-error';
+import { InputError } from './input-error';
 
 type Props = {
   register: UseFormRegisterReturn<any>;
@@ -17,7 +17,7 @@ type Props = {
   errorMessageHandling?: 'auto' | 'manual';
 };
 
-const Input: React.FC<Props> = ({
+export const Input: React.FC<Props> = ({
   icon,
   type,
   required,
@@ -47,5 +47,3 @@ const Input: React.FC<Props> = ({
     {errorMessageHandling === 'auto' && <InputError text={error} />}
   </div>
 );
-
-export default Input;

@@ -6,13 +6,13 @@ import { useState } from 'react';
 import { softDeleteLinkAction } from '@/lib/server/actions';
 import type { LinkWithStats } from '@/lib/server/get-current-user-links';
 
-import LinkCard from './link-card';
+import { LinkCard } from './link-card';
 
 type Props = {
   links: LinkWithStats[];
 };
 
-const LinksList: React.FC<Props> = ({ links: inputLinks }) => {
+export const LinksList: React.FC<Props> = ({ links: inputLinks }) => {
   const [links, setLinks] = useState(inputLinks);
 
   if (links.length === 0) {
@@ -40,5 +40,3 @@ const LinksList: React.FC<Props> = ({ links: inputLinks }) => {
     </div>
   );
 };
-
-export default LinksList;

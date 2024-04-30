@@ -1,4 +1,4 @@
-const makeShortenedLink = (path: string): string => {
+export const makeShortenedLink = (path: string): string => {
   const pathArray = window.location.href.split('/');
   const protocol = pathArray[0];
   const host = pathArray[2];
@@ -6,5 +6,3 @@ const makeShortenedLink = (path: string): string => {
 
   return new URL(path, base).href;
 };
-
-export default makeShortenedLink;

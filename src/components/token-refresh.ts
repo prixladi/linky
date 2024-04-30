@@ -5,7 +5,7 @@ import { useEffect, useRef } from 'react';
 import { wait } from '@/lib';
 import { refreshUserTokenIfNeededAction } from '@/lib/server/actions';
 
-const TokenRefresh: React.FC = () => {
+export const TokenRefresh: React.FC = () => {
   const running = useRef(false);
 
   useEffect(() => {
@@ -29,5 +29,3 @@ const TokenRefresh: React.FC = () => {
 
   return null;
 };
-
-export default TokenRefresh;

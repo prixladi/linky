@@ -10,13 +10,13 @@ import { Button, Input, InputError } from '@/components';
 import { isValidUrl, makeShortenedLink } from '@/lib';
 import { shortenUrlAction } from '@/lib/server/actions';
 
-import ShortenResult from './shorten-result';
+import { ShortenResult } from './shorten-result';
 
 type FormValues = { url: string };
 
 type Result = { link: string; forUrl: string };
 
-const FormSection: React.FC = () => {
+export const FormSection: React.FC = () => {
   const {
     register,
     handleSubmit,
@@ -83,5 +83,3 @@ const FormSection: React.FC = () => {
     </div>
   );
 };
-
-export default FormSection;

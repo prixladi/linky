@@ -7,6 +7,4 @@ type RegisterData = {
   password: string;
 };
 
-const registerUserAction = async (data: RegisterData) => createNewUser(data);
-
-export default registerUserAction;
+export const registerUserAction = async (data: RegisterData) => createNewUser(data);

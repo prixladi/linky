@@ -5,7 +5,7 @@ import { copyToClipboard } from '@/lib';
 
 type Props = { link?: string };
 
-const ShortenResult: React.FC<Props> = ({ link }) =>
+export const ShortenResult: React.FC<Props> = ({ link }) =>
   link && (
     <div
       role="button"
@@ -26,5 +26,3 @@ const ShortenResult: React.FC<Props> = ({ link }) =>
       />
     </div>
   );
-
-export default ShortenResult;

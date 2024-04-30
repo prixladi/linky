@@ -1,14 +1,24 @@
 import { cookies, headers } from 'next/headers';
 
 import { getUserFromToken } from '@/server/methods/user';
+import { redirect } from 'next/navigation';
 
-const getCurrentUser = async () => {
+type User = {
+  id: number;
+  email: string;
+};
+
+export const getCurrentUser = async (): Promise<User | null> => {
   const accessToken = headers().get('accessToken') ?? cookies().get('accessToken')?.value;
-  if (!accessToken) return undefined;
+  if (!accessToken) return null;
 
   const userResult = await getUserFromToken({ accessToken });
-  if ('error' in userResult) return undefined;
+  if ('error' in userResult) return null;
   return userResult;
 };
 
-export default getCurrentUser;
+export const getCurrentUserOrRedirect = async (): Promise<User> => {
+  const user = await getCurrentUser();
+  if (!user) redirect('sign-in');
+  return user;
+};

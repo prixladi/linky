@@ -1,1 +1,1 @@
-export { default as getUserLinksWithStats } from './get-user-links-with-stats';
+export * from './get-user-links-with-stats';

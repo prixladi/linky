@@ -6,7 +6,7 @@ type Props = {
   stats: Pick<LinkWithStats, 'totalHitCount' | 'hitRecords'>;
 };
 
-const LinkCardStats: React.FC<Props> = ({ stats: { hitRecords, totalHitCount } }) => {
+export const LinkCardStats: React.FC<Props> = ({ stats: { hitRecords, totalHitCount } }) => {
   const [lastDayRecord] = hitRecords;
   const lastDayPercentage =
     totalHitCount && lastDayRecord?.hitCount
@@ -25,5 +25,3 @@ const LinkCardStats: React.FC<Props> = ({ stats: { hitRecords, totalHitCount } }
     </div>
   );
 };
-
-export default LinkCardStats;

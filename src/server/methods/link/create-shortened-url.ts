@@ -8,7 +8,7 @@ type Data = {
 
 type Result = { path: string };
 
-const createShortenedUrl = async ({ url, userId }: Data): Promise<Result> => {
+export const createShortenedUrl = async ({ url, userId }: Data): Promise<Result> => {
   const path = generateRandomPath(5);
   const insertedLink = await db
     .insert(link)
@@ -29,5 +29,3 @@ const generateRandomPath = (length: number) => {
   }
   return result;
 };
-
-export default createShortenedUrl;

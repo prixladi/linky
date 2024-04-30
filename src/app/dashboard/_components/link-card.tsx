@@ -1,18 +1,18 @@
 'use client';
 
-import { Button, Icon } from '@/components';
+import { Icon } from '@/components';
 import { copyToClipboard, makeShortenedLink } from '@/lib';
 import type { LinkWithStats } from '@/lib/server/get-current-user-links';
 
-import LinkCardStats from './link-card-stats';
-import LinkRemoveButton from './link-remove-button';
+import { LinkCardStats } from './link-card-stats';
+import { LinkRemoveButton } from './link-remove-button';
 
 type Props = {
   link: LinkWithStats;
   onRemove: () => any;
 };
 
-const LinkCard: React.FC<Props> = ({ link: { id, path, url, ...stats }, onRemove }) => (
+export const LinkCard: React.FC<Props> = ({ link: { id, path, url, ...stats }, onRemove }) => (
   <div className="card card-compact bg-base-100 shadow-md flex-col sm:flex-row justify-between">
     <div className="card-body gap-1">
       <h2 className="card-title text-md mb-0">
@@ -41,5 +41,3 @@ const LinkCard: React.FC<Props> = ({ link: { id, path, url, ...stats }, onRemove
     </div>
   </div>
 );
-
-export default LinkCard;

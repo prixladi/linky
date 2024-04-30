@@ -1,4 +1,4 @@
-const getTokenExpiration = (token?: string): number | null => {
+export const getTokenExpiration = (token?: string): number | null => {
   if (!token) return null;
 
   const parts = token.split('.');
@@ -11,5 +11,3 @@ const getTokenExpiration = (token?: string): number | null => {
 
   return Math.floor(data.exp - Date.now() / 1000);
 };
-
-export default getTokenExpiration;

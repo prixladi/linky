@@ -14,7 +14,7 @@ export type LinkWithStats = {
   hitRecords: { hitCount: number; date: Date }[];
 };
 
-const getUserLinksWithStats = async (userId: number): Promise<Response> => {
+export const getUserLinksWithStats = async (userId: number): Promise<Response> => {
   const dbRecords = await db
     .select({
       id: link.id,
@@ -67,5 +67,3 @@ const convertLinks = (dbRecords: DbRecord[]): LinkWithStats[] => {
 
   return Object.values(result);
 };
-
-export default getUserLinksWithStats;

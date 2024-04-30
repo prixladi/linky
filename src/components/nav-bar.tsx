@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-const NavBar = () => (
+export const NavBar = () => (
   <div className="navbar backdrop-blur-sm	fixed z-50">
     <div className="flex-1 navbar-start">
       <Link href="/" className="btn btn-ghost text-2xl">
@@ -64,5 +64,3 @@ const NavBar = () => (
     </div>
   </div>
 );
-
-export default NavBar;

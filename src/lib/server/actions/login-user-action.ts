@@ -10,7 +10,7 @@ type LoginData = {
   password: string;
 };
 
-const loginAction = async (data: LoginData) => {
+export const loginUserAction = async (data: LoginData) => {
   const result = await loginUser(data);
   if ('error' in result) return result;
 
@@ -21,5 +21,3 @@ const loginAction = async (data: LoginData) => {
 
   return undefined;
 };
-
-export default loginAction;

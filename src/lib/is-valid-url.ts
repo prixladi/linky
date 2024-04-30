@@ -1,4 +1,4 @@
-const isValidUrl = (str: string) => {
+export const isValidUrl = (str: string) => {
   let url;
 
   try {
@@ -9,5 +9,3 @@ const isValidUrl = (str: string) => {
 
   return url.protocol === 'http:' || url.protocol === 'https:';
 };
-
-export default isValidUrl;

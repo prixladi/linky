@@ -17,7 +17,7 @@ type Result =
     }
   | BadRequest;
 
-const refreshUserToken = async ({ refreshToken }: Data): Promise<Result> => {
+export const refreshUserToken = async ({ refreshToken }: Data): Promise<Result> => {
   const payload = await verifyRefreshToken(refreshToken);
   if (!payload) return makeBadRequest();
 
@@ -38,5 +38,3 @@ const refreshUserToken = async ({ refreshToken }: Data): Promise<Result> => {
     accessTokenExpirationS: accessTokenResult.duration,
   };
 };
-
-export default refreshUserToken;

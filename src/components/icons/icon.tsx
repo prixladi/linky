@@ -1,9 +1,9 @@
 import type { SVGAttributes } from 'react';
 
-import CopyIcon from './copy';
-import EnvelopeIcon from './envelope';
-import KeyIcon from './key';
-import PlusIcon from './plus';
+import { CopyIcon } from './copy';
+import { EnvelopeIcon } from './envelope';
+import { KeyIcon } from './key';
+import { PlusIcon } from './plus';
 
 const icons = {
   plus: { component: PlusIcon, viewBox: '0 0 50 50' },
@@ -18,7 +18,7 @@ export type IconProps = SVGAttributes<any> & {
   type: IconType;
 };
 
-const Icon = ({ type, ...svgAttributes }: IconProps) => {
+export const Icon = ({ type, ...svgAttributes }: IconProps) => {
   const { component: Component, viewBox } = icons[type];
 
   return (
@@ -33,5 +33,3 @@ const Icon = ({ type, ...svgAttributes }: IconProps) => {
     </svg>
   );
 };
-
-export default Icon;

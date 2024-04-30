@@ -17,7 +17,7 @@ type Result =
     }
   | Conflict;
 
-const createNewUser = async ({ email, password }: Data): Promise<Result> => {
+export const createNewUser = async ({ email, password }: Data): Promise<Result> => {
   const lowercaseEmail = email.toLowerCase();
 
   const [existingUser] = await db
@@ -41,5 +41,3 @@ const createNewUser = async ({ email, password }: Data): Promise<Result> => {
 
   return { id: insertedUser[0].id };
 };
-
-export default createNewUser;

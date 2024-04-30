@@ -1,4 +1,4 @@
-export { default as createNewUser } from './create-new-user';
-export { default as loginUser } from './login-user';
-export { default as getUserFromToken } from './get-user-from-token';
-export { default as refreshUserToken } from './refresh-user-token';
+export * from './create-new-user';
+export * from './login-user';
+export * from './get-user-from-token';
+export * from './refresh-user-token';

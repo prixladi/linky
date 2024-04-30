@@ -9,7 +9,7 @@ type Options = {
 
 type Result = { url?: string };
 
-const getLinkByPath = async (path: string, { incrementStat }: Options): Promise<Result> => {
+export const getLinkByPath = async (path: string, { incrementStat }: Options): Promise<Result> => {
   const [dbLink] = await db
     .select()
     .from(link)
@@ -36,5 +36,3 @@ const getLinkByPath = async (path: string, { incrementStat }: Options): Promise<
 
   return { url: dbLink?.url };
 };
-
-export default getLinkByPath;
