@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Linky
 
-## Getting Started
+Simple url shortener service with statistics for authenticated users.
 
-First, run the development server:
+## Development
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
+1) Set up a instance of the PostgreSQL database. For example the [Vercel postgres](https://vercel.com/docs/storage/vercel-postgres) has a free tier.
+2) Set up `.env.local` file:
+    - DB_CONNECTION_STRING=(PostgreSQL connection string)
+    - TOKEN_SECRET=(Secret for token signature)
+3) Run:
+```sh
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The application will start listening on port `3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Overview
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+The project is using classic Next.js app router structure with `src` folder. Pages are utilizing [Server components](https://nextjs.org/docs/app/building-your-application/rendering/server-components) and [Server actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations) whenever possible.
 
-## Learn More
+### Structure
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- `/public` - Web root assets
+- `/src` - Source code
+    - `./app` - Next.js app router root, following mandatory app router structure.         
+        - Folders `./**/_components` include route scoped components.
+    - `./components` - Shared UI components
+    - `./server` - Server logic decoupled from Next.js frontend and backend
+        - `./db` - Db connection, client and models
+        - `./utils` - Server internal utils 
+        - `./methods` - Front facing methods containing business logic
+    - `./lib`
+        - `./server` - Bindings to server logics (`/src/server/methods`)
+            - `./actions` - Next.js server actions
+    - `./middleware.ts` - Next.js middleware handling protected routes
