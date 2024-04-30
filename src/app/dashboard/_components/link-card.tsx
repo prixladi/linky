@@ -5,6 +5,7 @@ import { copyToClipboard, makeShortenedLink } from '@/lib';
 import type { LinkWithStats } from '@/lib/server/get-current-user-links';
 
 import LinkCardStats from './link-card-stats';
+import LinkRemoveButton from './link-remove-button';
 
 type Props = {
   link: LinkWithStats;
@@ -33,9 +34,7 @@ const LinkCard: React.FC<Props> = ({ link: { id, path, url, ...stats }, onRemove
       <p className="text-ellipsis  overflow-hidden sm:max-w-[450px] whitespace-nowrap">{url}</p>
       <div className="card-actions justify-between flex-row items-center">
         <div>
-          <Button onClick={onRemove} variant="sm" type="button" className="btn-primary">
-            Remove
-          </Button>
+          <LinkRemoveButton onRemove={onRemove} path={path} />
         </div>
         <LinkCardStats stats={stats} />
       </div>

@@ -1,4 +1,4 @@
-import { eq, sql } from 'drizzle-orm';
+import { eq, sql, and } from 'drizzle-orm';
 
 import { db } from '../../db';
 import { link, stat } from '../../db/schema';
@@ -10,7 +10,10 @@ type Options = {
 type Result = { url?: string };
 
 const getLinkByPath = async (path: string, { incrementStat }: Options): Promise<Result> => {
-  const [dbLink] = await db.select().from(link).where(eq(link.path, path));
+  const [dbLink] = await db
+    .select()
+    .from(link)
+    .where(and(eq(link.path, path), eq(link.deleted, false)));
 
   if (dbLink && incrementStat) {
     const now = new Date();
