@@ -16,7 +16,7 @@ const getValueOrThrow = (key: string) => {
 };
 
 const config = {
-  dbConnectionString: getValueOrThrow('DB_CONNECTION_STRING'),
+  postgresUrl: getValueOrThrow('POSTGRES_URL'),
   tokenSecret: getValueOrThrow('TOKEN_SECRET'),
   accessTokenDurationInSeconds: getIntegerOrDefault(
     'ACCESS_TOKEN_DURATION_IN_SECONDS',

@@ -6,7 +6,7 @@ Simple url shortener service with statistics for authenticated users.
 
 1) Set up a instance of the PostgreSQL database. For example the [Vercel postgres](https://vercel.com/docs/storage/vercel-postgres) has a free tier.
 2) Set up `.env.local` file:
-    - DB_CONNECTION_STRING=(PostgreSQL connection string)
+    - POSTGRES_URL=(PostgreSQL connection string)
     - TOKEN_SECRET=(Secret for token signature)
 3) Run:
 ```sh
