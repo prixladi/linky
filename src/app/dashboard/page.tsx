@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import { Suspense } from 'react';
 
-import { Button, Heading } from '@/components';
+import { Button, PageContainer } from '@/components';
 import { getCurrentUserOrRedirect } from '@/lib/server';
 import { logoutUserAction } from '@/lib/server/actions';
 
@@ -11,9 +11,7 @@ const Dashboard: NextPage = async () => {
   const currentUser = await getCurrentUserOrRedirect();
 
   return (
-    <div className="pt-24 md:pt-36 pb-8 w-full px-3 m-auto bg-transparent max-w-lg">
-      <Heading text="Dashboard" />
-
+    <PageContainer heading="Dashboard">
       <div className="flex justify-center gap-2 items-center text-sm">
         <p className="py-4 text-center italic">Currently logged in as {currentUser?.email}</p>
 
@@ -37,7 +35,7 @@ const Dashboard: NextPage = async () => {
       >
         <LinksSection />
       </Suspense>
-    </div>
+    </PageContainer>
   );
 };
 

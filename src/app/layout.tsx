@@ -11,11 +11,11 @@ export const metadata: Metadata = {
   icons: { icon: '/favicon.ico' },
 };
 
-const RootLayout = ({
-  children,
-}: Readonly<{
+type Props = {
   children: React.ReactNode;
-}>) => (
+};
+
+const RootLayout: React.FC<Props> = ({ children }) => (
   <html data-theme="valentine" lang="en">
     <body className={inter.className}>
       <NavBar />

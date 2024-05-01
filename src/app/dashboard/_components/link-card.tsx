@@ -19,6 +19,7 @@ export const LinkCard: React.FC<Props> = ({ link: { id, path, url, ...stats }, o
         <div
           onClick={() => copyToClipboard(makeShortenedLink(path))}
           role="button"
+          tabIndex={0}
           className="badge badge-neutral  cursor-pointer"
         >
           /{path}
@@ -26,6 +27,7 @@ export const LinkCard: React.FC<Props> = ({ link: { id, path, url, ...stats }, o
         <div
           onClick={() => copyToClipboard(makeShortenedLink(path))}
           role="button"
+          tabIndex={0}
           className="badge badge-neutral cursor-pointer"
         >
           Copy <Icon type="copy" className="w-4 h-4 pl-1" />

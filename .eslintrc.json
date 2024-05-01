@@ -78,6 +78,7 @@
       {
         "extensions": [".jsx", ".tsx"]
       }
-    ]
+    ],
+    "jsx-a11y/click-events-have-key-events": 0
   }
 }

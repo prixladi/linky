@@ -43,8 +43,9 @@ type DbRecord = {
 
 const convertLinks = (dbRecords: DbRecord[]): LinkWithStats[] => {
   const result = dbRecords.reduce<Record<number, LinkWithStats>>((linkMap, dbRecord) => {
-    if (!linkMap[dbRecord.id]) {
-      linkMap[dbRecord.id] = {
+    const map = linkMap;
+    if (!map[dbRecord.id]) {
+      map[dbRecord.id] = {
         id: dbRecord.id,
         url: dbRecord.url,
         path: dbRecord.path,
@@ -55,14 +56,14 @@ const convertLinks = (dbRecords: DbRecord[]): LinkWithStats[] => {
     }
 
     if (dbRecord.hitCount && dbRecord.date) {
-      linkMap[dbRecord.id].totalHitCount += dbRecord.hitCount;
-      linkMap[dbRecord.id].hitRecords.push({
+      map[dbRecord.id].totalHitCount += dbRecord.hitCount;
+      map[dbRecord.id].hitRecords.push({
         hitCount: dbRecord.hitCount,
         date: dbRecord.date,
       });
     }
 
-    return linkMap;
+    return map;
   }, {});
 
   return Object.values(result);

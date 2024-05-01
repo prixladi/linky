@@ -1,7 +1,7 @@
 import { cookies, headers } from 'next/headers';
+import { redirect } from 'next/navigation';
 
 import { getUserFromToken } from '@/server/methods/user';
-import { redirect } from 'next/navigation';
 
 type User = {
   id: number;

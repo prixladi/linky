@@ -8,7 +8,7 @@ import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import type { SubmitHandler } from 'react-hook-form';
 
-import { Button, Heading, Input } from '@/components';
+import { Button, Input, PageContainer } from '@/components';
 import { loginUserAction } from '@/lib/server/actions';
 
 type FormValues = { email: string; password: string };
@@ -43,9 +43,7 @@ const SignIn: NextPage = () => {
   );
 
   return (
-    <div className="pt-24 md:pt-36 w-full px-3 m-auto bg-transparent max-w-lg">
-      <Heading text="Login" />
-
+    <PageContainer heading="Login">
       <p className="pt-3 text-center text-neutral">
         Don&apos;t have an account yet?
         <Link className="text-secondary underline pl-1" href="/sign-up">
@@ -81,7 +79,7 @@ const SignIn: NextPage = () => {
           Sign in
         </Button>
       </form>
-    </div>
+    </PageContainer>
   );
 };
 
