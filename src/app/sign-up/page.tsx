@@ -52,12 +52,12 @@ const SignUp: NextPage = () => {
     <PageContainer heading="Register">
       <p className="pt-3 text-center text-neutral">
         Already have an account?
-        <Link className="text-secondary underline pl-1" href="/sign-in">
+        <Link className="pl-1 text-secondary underline" href="/sign-in">
           Login
         </Link>
       </p>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="pt-8 flex flex-col gap-1">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-1 pt-8">
         <Input
           icon="envelope"
           placeholder="Email"

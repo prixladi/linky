@@ -26,7 +26,7 @@ export const LinksList: React.FC<Props> = ({ links: inputLinks }) => {
   }
 
   return (
-    <div className="flex gap-2 flex-col">
+    <div className="flex flex-col gap-2">
       {links.map((link) => (
         <LinkCard
           key={link.id}

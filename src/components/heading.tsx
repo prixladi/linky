@@ -3,5 +3,5 @@ type Props = {
 };
 
 export const Heading: React.FC<Props> = ({ text }) => (
-  <h1 className="text-5xl text-center font-semibold text-primary">{text}</h1>
+  <h1 className="text-center text-5xl font-semibold text-primary">{text}</h1>
 );

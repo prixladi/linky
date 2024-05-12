@@ -34,7 +34,7 @@ export const Input: React.FC<Props> = ({
         'mb-7': errorMessageHandling === 'auto' && !error,
       })}
     >
-      {icon && <Icon type={icon} className="w-4 h-4 opacity-70" />}
+      {icon && <Icon type={icon} className="h-4 w-4 opacity-70" />}
       <input
         id={register.name}
         className="w-full"

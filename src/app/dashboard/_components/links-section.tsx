@@ -6,7 +6,7 @@ export const LinksSection: React.FC = async () => {
   const links = await getCurrentUserLinks();
 
   return (
-    <div className="flex gap-2 flex-col">
+    <div className="flex flex-col gap-2">
       <LinksList links={links} />
     </div>
   );

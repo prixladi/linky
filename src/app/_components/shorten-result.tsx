@@ -13,9 +13,9 @@ export const ShortenResult: React.FC<Props> = ({ link }) =>
       onClick={() => {
         if (link) copyToClipboard(link);
       }}
-      className="animateShow flex gap-2 mt-8 sm:mt-4 bg-neutral text-neutral-content px-8 py-2 items-center justify-between rounded-xl cursor-pointer"
+      className="animateShow mt-8 flex cursor-pointer items-center justify-between gap-2 rounded-xl bg-neutral px-8 py-2 text-neutral-content sm:mt-4"
     >
-      <span className="truncate text-md">{link}</span>
+      <span className="text-md truncate">{link}</span>
       <Icon
         type="copy"
         stroke="currentColor"

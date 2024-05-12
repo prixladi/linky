@@ -12,7 +12,7 @@ const Dashboard: NextPage = async () => {
 
   return (
     <PageContainer heading="Dashboard">
-      <div className="flex justify-center gap-2 items-center text-sm">
+      <div className="flex items-center justify-center gap-2 text-sm">
         <p className="py-4 text-center italic">Currently logged in as {currentUser?.email}</p>
 
         <form action={logoutUserAction}>
@@ -29,7 +29,7 @@ const Dashboard: NextPage = async () => {
       <Suspense
         fallback={
           <div className="flex justify-center">
-            <span className="m-auto loading loading-ring loading-lg" />
+            <span className="loading loading-ring loading-lg m-auto" />
           </div>
         }
       >

@@ -5,7 +5,7 @@ type Props = React.PropsWithChildren<{
 }>;
 
 export const PageContainer: React.FC<Props> = ({ children, heading }) => (
-  <div className="pt-24 md:pt-36 pb-8 w-full px-3 m-auto bg-transparent max-w-lg">
+  <div className="m-auto w-full max-w-lg bg-transparent px-3 pb-8 pt-24 md:pt-36">
     <Heading text={heading} />
     {children}
   </div>

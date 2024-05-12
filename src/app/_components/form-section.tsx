@@ -48,7 +48,7 @@ export const FormSection: React.FC = () => {
     <div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex sm:flex-row flex-col gap-1 flex-auto items-center"
+        className="flex flex-auto flex-col items-center gap-1 sm:flex-row"
       >
         <div
           className={clsx('w-full', {
@@ -78,7 +78,7 @@ export const FormSection: React.FC = () => {
         </Button>
       </form>
 
-      <InputError text={errors.url?.message} className="sm:flex hidden" />
+      <InputError text={errors.url?.message} className="hidden sm:flex" />
       <ShortenResult link={result?.link} />
     </div>
   );

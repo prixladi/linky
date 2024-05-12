@@ -13,9 +13,9 @@ type Props = {
 };
 
 export const LinkCard: React.FC<Props> = ({ link: { id, path, url, ...stats }, onRemove }) => (
-  <div className="card card-compact bg-base-100 shadow-md flex-col sm:flex-row justify-between">
+  <div className="card card-compact flex-col justify-between bg-base-100 shadow-md sm:flex-row">
     <div className="card-body gap-1">
-      <h2 className="card-title text-md mb-0">
+      <h2 className="text-md card-title mb-0">
         <div
           onClick={() => copyToClipboard(makeShortenedLink(path))}
           role="button"
@@ -30,11 +30,11 @@ export const LinkCard: React.FC<Props> = ({ link: { id, path, url, ...stats }, o
           tabIndex={0}
           className="badge badge-neutral cursor-pointer"
         >
-          Copy <Icon type="copy" className="w-4 h-4 pl-1" />
+          Copy <Icon type="copy" className="h-4 w-4 pl-1" />
         </div>
       </h2>
-      <p className="text-ellipsis  overflow-hidden sm:max-w-[450px] whitespace-nowrap">{url}</p>
-      <div className="card-actions justify-between flex-row items-center">
+      <p className="overflow-hidden  text-ellipsis whitespace-nowrap sm:max-w-[450px]">{url}</p>
+      <div className="card-actions flex-row items-center justify-between">
         <div>
           <LinkRemoveButton onRemove={onRemove} path={path} />
         </div>
